@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="lfk">
+		<fieldset name="lfk" label="PLG_USER_LFK_SLIDER_LABEL">
+			<field name="license"
+				type="text"
+				id="license"
+				description="PLG_USER_LFK_FIELD_LICENSE_DESC"
+				filter="string"
+				label="PLG_USER_LFK_FIELD_LICENSE_LABEL"
+				size="30"/>
+		</fieldset>
+	</fields>
+</form>
