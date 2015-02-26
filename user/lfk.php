@@ -91,6 +91,21 @@ class PlgUserLfk extends JPlugin {
     $data['nok_phone'] = $result[17];
     $data['zipcode'] = $result[18];
     $data['city'] = $result[19];
+
+    $db->setQuery('SELECT ' .
+      'PhoneNo FROM skywin.memberphone WHERE PhoneType = "M" AND ' .
+      'InternalNo = "' . (int)$skywinId . '"');
+
+    try {
+      $results = $db->loadRowList();
+    } catch (RuntimeException $e) {
+      $this->_subject->setError($e->getMessage());
+      return false;
+    }
+
+    if (isset($results[0])) {
+      $data['phone'] = $results[0][0];
+    }
     return true;
   }
 

@@ -61,6 +61,9 @@
       <field name="email" type="text" id="email" filter="string" size="30"
         description="PLG_USER_LFK_FIELD_EMAIL_DESC"
         label="PLG_USER_LFK_FIELD_EMAIL_LABEL" />
+      <field name="phone" type="text" id="phone" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_PHONE_DESC"
+        label="PLG_USER_LFK_FIELD_PHONE_LABEL" />
       <field name="sex" type="text" id="sex" filter="string" size="30"
         description="PLG_USER_LFK_FIELD_SEX_DESC"
         label="PLG_USER_LFK_FIELD_SEX_LABEL" />
