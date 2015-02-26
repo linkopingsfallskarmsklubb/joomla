@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fields name="lfk">
-		<fieldset name="lfk" label="PLG_USER_LFK_SLIDER_LABEL">
-			<field name="license"
-				type="text"
-				id="license"
-				description="PLG_USER_LFK_FIELD_LICENSE_DESC"
-				filter="string"
-				label="PLG_USER_LFK_FIELD_LICENSE_LABEL"
-				size="30"/>
-		</fieldset>
-	</fields>
+  <fields name="lfk">
+    <fieldset name="lfk" label="PLG_USER_LFK_SLIDER_LABEL">
+      <field name="license" type="text" id="license" filter="int" size="30"
+        description="PLG_USER_LFK_FIELD_LICENSE_DESC"
+        label="PLG_USER_LFK_FIELD_LICENSE_LABEL" />
+
+      <field name="jumps" type="text" id="jumps" filter="int" size="30"
+        description="PLG_USER_LFK_FIELD_JUMPS_DESC"
+        label="PLG_USER_LFK_FIELD_JUMPS_LABEL" />
+
+     <field name="balance" type="text" id="balance" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_BALANCE_DESC"
+        label="PLG_USER_LFK_FIELD_BALANCE_LABEL" />
+
+     <field name="weight" type="text" id="weight" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_WEIGHT_DESC"
+        label="PLG_USER_LFK_FIELD_WEIGHT_LABEL" />
+
+      <field name="reg_year" type="text" id="reg_year" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_REG_YEAR_DESC"
+        label="PLG_USER_LFK_FIELD_REG_YEAR_LABEL" />
+      <field name="reg_club" type="text" id="reg_club" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_REG_CLUB_DESC"
+        label="PLG_USER_LFK_FIELD_REG_CLUB_LABEL" />
+      <field name="license_type" type="text" id="license_type" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_LICENSE_TYPE_DESC"
+        label="PLG_USER_LFK_FIELD_LICENSE_TYPE_LABEL" />
+
+     <field name="pid" type="text" id="pid" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_PID_DESC"
+        label="PLG_USER_LFK_FIELD_PID_LABEL" />
+      <field name="firstname" type="text" id="firstname" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_FIRSTNAME_DESC"
+        label="PLG_USER_LFK_FIELD_FIRSTNAME_LABEL" />
+      <field name="lastname" type="text" id="lastname" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_LASTNAME_DESC"
+        label="PLG_USER_LFK_FIELD_LASTNAME_LABEL" />
+      <field name="nickname" type="text" id="nickname" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_NICKNAME_DESC"
+        label="PLG_USER_LFK_FIELD_NICKNAME_LABEL" />
+      <field name="address1" type="text" id="address1" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_ADDRESS1_DESC"
+        label="PLG_USER_LFK_FIELD_ADDRESS1_LABEL" />
+      <field name="address2" type="text" id="address2" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_ADDRESS2_DESC"
+        label="PLG_USER_LFK_FIELD_ADDRESS2_LABEL" />
+      <field name="zipcode" type="text" id="zipcode" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_ZIPCODE_DESC"
+        label="PLG_USER_LFK_FIELD_ZIPCODE_LABEL" />
+      <field name="city" type="text" id="city" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_CITY_DESC"
+        label="PLG_USER_LFK_FIELD_CITY_LABEL" />
+      <field name="country" type="text" id="country" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_COUNTRY_DESC"
+        label="PLG_USER_LFK_FIELD_COUNTRY_LABEL" />
+      <field name="nationality" type="text" id="nationality" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_NATIONALITY_DESC"
+        label="PLG_USER_LFK_FIELD_NATIONALITY_LABEL" />
+      <field name="email" type="text" id="email" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_EMAIL_DESC"
+        label="PLG_USER_LFK_FIELD_EMAIL_LABEL" />
+      <field name="sex" type="text" id="sex" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_SEX_DESC"
+        label="PLG_USER_LFK_FIELD_SEX_LABEL" />
+      <field name="first_jump_date" type="text" id="first_jump_date" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_FIRST_JUMP_DATE_DESC"
+        label="PLG_USER_LFK_FIELD_FIRST_JUMP_DATE_LABEL" />
+      <field name="nok_name" type="text" id="nok_name" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_NOK_NAME_DESC"
+        label="PLG_USER_LFK_FIELD_NOK_NAME_LABEL" />
+      <field name="nok_phone" type="text" id="nok_phone" filter="string" size="30"
+        description="PLG_USER_LFK_FIELD_NOK_PHONE_DESC"
+        label="PLG_USER_LFK_FIELD_NOK_PHONE_LABEL" />
+
+      <field name="skywin_id" type="text" id="skywin_id" filter="int"
+        description="PLG_USER_LFK_FIELD_SKYWIN_ID_DESC"
+        label="PLG_USER_LFK_FIELD_SKYWIN_ID_LABEL" />
+    </fieldset>
+  </fields>
 </form>

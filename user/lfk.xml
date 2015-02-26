@@ -18,31 +18,4 @@
 		<language tag="sv-SE">sv-SE.plg_user_lfk.ini</language>
 		<language tag="en-GB">en-GB.plg_user_lfk.sys.ini</language>
 	</languages>
-	<config>
-		<fields name="params">
-			<fieldset name="basic" addfieldpath="/administrator/components/com_content/models/fields">
-				<field name="register-require-user" type="spacer"
-					label="PLG_USER_LFK_FIELD_REGISTER_REQUIRE_USER" />
-
-				<field name="register-require_license" type="list"
-					description="PLG_USER_LFK_FIELD_LICENSE_DESC"
-					label="PLG_USER_LFK_FIELD_LICENSE_LABEL">
-					<option value="2">JOPTION_REQUIRED</option>
-					<option value="1">JOPTION_OPTIONAL</option>
-					<option value="0">JDISABLED</option>
-				</field>
-
-				<field name="profile-require-user" type="spacer"
-					label="PLG_USER_LFK_FIELD_PROFILE_REQUIRE_USER" />
-
-				<field name="profile-require_license" type="list"
-					description="PLG_USER_LFK_FIELD_LICENSE_DESC"
-					label="PLG_USER_LFK_FIELD_LICENSE_LABEL">
-					<option value="2">JOPTION_REQUIRED</option>
-					<option value="1">JOPTION_OPTIONAL</option>
-					<option value="0">JDISABLED</option>
-				</field>
-			</fieldset>
-		</fields>
-	</config>
 </extension>
