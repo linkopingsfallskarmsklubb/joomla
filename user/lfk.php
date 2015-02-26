@@ -148,6 +148,7 @@ class PlgUserLfk extends JPlugin {
       'weight',
       'nok_name',
       'nok_phone',
+      'phone',
       'skywin_id');
 
     foreach ($fields as $field) {
