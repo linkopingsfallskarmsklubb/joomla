@@ -7,7 +7,7 @@
   <license>Creative Commons</license>
   <authorEmail>info@linkopingsfallskarmsklubb.se</authorEmail>
   <authorUrl>https://linkopingsfallskarmsklubb.se</authorUrl>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <description>Components for Manifest related pages</description>
 
   <files folder="site">

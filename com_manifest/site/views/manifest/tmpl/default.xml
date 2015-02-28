@@ -16,6 +16,7 @@
         <option value="aircraft">COM_MANIFEST_DATATYPE_AIRCRAFT_TITLE</option>
         <option value="account">COM_MANIFEST_DATATYPE_ACCOUNT_TITLE</option>
         <option value="jumps">COM_MANIFEST_DATATYPE_JUMPS_TITLE</option>
+        <option value="shame">COM_MANIFEST_DATATYPE_SHAME_TITLE</option>
       </field>
     </fieldset>
   </fields>

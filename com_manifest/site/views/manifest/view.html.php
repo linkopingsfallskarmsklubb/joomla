@@ -109,6 +109,10 @@ class ManifestViewManifest extends JViewLegacy {
   WHERE Member.InternalNo = $skywinId AND tj.jumptype=loadjump.jumptype
   ORDER BY Regdate desc,loadjump.loadno DESC"),
 
+  'shame' => array(
+"SELECT concat(Member.FirstName, ' ', Member.LastName), Member.Balance
+    FROM $d.Member WHERE Balance < 0 ORDER BY Balance LIMIT 25"),
+
   'club' => array('CALL club_stats'));
 
     $db = JFactory::getDbo();
