@@ -4,6 +4,7 @@ $doc = JFactory::getDocument();
 $app = JFactory::getApplication();
 $datatype = $app->input->get('datatype' ,'' , 'string');
 ?>
+<?php if ($this->showYears): ?>
 <script>
 function updateYear(element) {
   window.location =
@@ -16,10 +17,16 @@ function updateYear(element) {
     value="<?php echo $year; ?>"><?php echo $year; ?></option>
 <?php endforeach; ?>
 </select>
+<?php endif; ?>
 <?php if ($doc->getTitle()): ?>
 <h1><?php echo $doc->getTitle(); ?></h1>
 <?php endif; ?>
 <p>
+<?php
+if (count($this->results[0]) == 0) {
+  echo JText::_('COM_MANIFEST_NOTHING_HERE');
+}
+?>
 <?php foreach($this->results as $r_idx => $result): ?>
   <table class="manifest-data manifest-<?php echo $datatype . '-'.$r_idx; ?>">
     <tr>
@@ -38,7 +45,7 @@ function updateYear(element) {
     </tr>
     <?php endforeach; ?>
   </table>
-  <hr />
+<br />
 <?php endforeach; ?>
 
 </p>

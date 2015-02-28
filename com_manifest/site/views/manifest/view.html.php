@@ -13,6 +13,9 @@ class ManifestViewManifest extends JViewLegacy {
     $jinput = JFactory::getApplication()->input;
     $year = $jinput->get('year', (int)date('Y'), 'int');
 
+    // Only use the year dropdown for top lists
+    $this->showYears = strpos($datatype, 'top_') !== false;
+
     // 2002 - Now are valid years
     $this->years = array();
     for($i = (int)date('Y'); $i >= 2002; $i--) {
@@ -66,12 +69,18 @@ class ManifestViewManifest extends JViewLegacy {
   'aircraft' => array(
 "SELECT Load.Planereg, Count(load.Regdate),
   (SELECT Count(loadjump.LoadNo) FROM $d.LoadJump WHERE
-   Loadjump.Planereg=Load.Planereg) FROM $d.`load`
+   Loadjump.Planereg=Load.Planereg),
+  round((SELECT Count(loadjump.LoadNo) FROM $d.LoadJump WHERE
+   Loadjump.Planereg=Load.Planereg) / Count(load.Regdate), 2)
+  FROM $d.`load`
    GROUP BY Load.PlaneReg ORDER BY Load.planereg",
 "SELECT Load.PlaneReg, Year(load.RegDate), Count(Load.Regdate),
   (SELECT Count(Loadjump.loadno) FROM $d.loadjump WHERE
    loadjump.PlaneReg=load.PlaneReg AND year(load.regdate) =
-    year(loadjump.regdate))
+   year(loadjump.regdate)),
+  Round((SELECT Count(Loadjump.loadno) FROM $d.loadjump WHERE
+   loadjump.PlaneReg=load.PlaneReg AND year(load.regdate) =
+    year(loadjump.regdate)) / Count(load.Regdate), 2)
   FROM $d.`Load` GROUP BY Load.Planereg, Year(load.regdate)
   ORDER BY Load.PlaneReg, Year(load.regdate)"),
 
@@ -114,6 +123,9 @@ class ManifestViewManifest extends JViewLegacy {
       $this->results[] = $results;
     }
 
+    if ($datatype == 'club') {
+      $tpl = 'club';
+    }
     parent::display($tpl);
   }
 }
