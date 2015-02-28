@@ -159,7 +159,7 @@ class PlgUserLfk extends JPlugin {
           $form->removeField($field, 'lfk');
         }
       } else if ($name == 'com_users.registration') {
-        if ($field == 'license') {
+        if ($field == 'license' || $field == 'pid') {
           $form->setFieldAttribute($field, 'required', 'required', 'lfk');
         } else {
           $form->removeField($field, 'lfk');
@@ -180,7 +180,68 @@ class PlgUserLfk extends JPlugin {
     return true;
   }
 
-  public function onUserBeforeSave($user, $isnew, $data) {
+  public function onUserBeforeSave($user, $isNew, $data) {
+    $db = JFactory::getDbo();
+    $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
+      'MemberNo = "' . (int)$data['lfk']['license'] . '"');
+    try {
+      $results = $db->loadRowList();
+    } catch (RuntimeException $e) {
+      $this->_subject->setError($e->getMessage());
+      return false;
+    }
+
+    if (count($results) == 0) {
+        throw new Exception(
+          JText::_('PLG_USER_LFK_FIELD_LICENSE_NOT_FOUND'));
+    } else if (count($results) > 1) {
+        throw new Exception(
+          JText::_('PLG_USER_LFK_FIELD_LICENSE_MULTIPLE'));
+    }
+
+    $result = $results[0];
+
+    $app = JFactory::getApplication();
+    if ($app->isSite() && $isNew) {
+      if ($result[0] == NULL) {
+        throw new Exception('Internal Error: InternalNo was NULL');
+      }
+      if ($result[1] == NULL) {
+        throw new Exception('Internal Error: PID was NULL');
+      }
+
+      $skywinId = $result[0];
+      $correctPid = str_replace('-', '', $result[1]);
+
+      // Check if we already have a user with this internal ID
+      $db = JFactory::getDbo();
+      $db->setQuery('SELECT profile_key, profile_value FROM #__user_profiles' .
+        ' WHERE profile_key = "lfk.skywin_id" AND profile_value = ' .
+        (int)$skywinId . ' ORDER BY ordering');
+      try {
+        $results = $db->loadRowList();
+      } catch (RuntimeException $e) {
+        $this->_subject->setError($e->getMessage());
+        return false;
+      }
+
+      if (count($results) > 0) {
+        throw new Exception(
+          JText::_('PLG_USER_LFK_FIELD_LICENSE_ALREADY_REGISTERED'));
+      }
+
+      // Validate the user (P.Nr == SkyWin P.Nr)
+      $pid = str_replace('-', '', $data['lfk']['pid']);
+      if (strlen($pid) < 10) {
+        throw new Exception(
+          JText::_('PLG_USER_LFK_FIELD_PID_TOO_SHORT'));
+      }
+      if (strpos($correctPid, $pid) === false) {
+        throw new Exception(
+          JText::_('PLG_USER_LFK_FIELD_PID_NO_MATCH'));
+      }
+    }
+
     return true;
   }
 
@@ -198,12 +259,17 @@ class PlgUserLfk extends JPlugin {
         $data['lfk']['license'] = $oldData['license'];
       }
 
+      // PID is used for new registrations but only for validation
+      if ($app->isSite() && $isNew) {
+        unset($data['lfk']['pid']);
+      }
+
       // If we're changing the license number from the admin site
       // or we're a new user, resolve the internal ID.
       if ($isNew || (!$app->isSite() &&
                      $data['lfk']['license'] != $oldData['license'])) {
         $db = JFactory::getDbo();
-        $db->setQuery('SELECT InternalNo FROM skywin.member WHERE ' .
+        $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
           'MemberNo = "' . (int)$data['lfk']['license'] . '"');
         try {
           $results = $db->loadRowList();
@@ -212,7 +278,6 @@ class PlgUserLfk extends JPlugin {
           return false;
         }
 
-        // TODO: Check for matches != 1, and alert.
         $result = $results[0];
         $data['lfk']['skywin_id'] = $result[0];
       }
