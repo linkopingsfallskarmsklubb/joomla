@@ -4,6 +4,18 @@ $doc = JFactory::getDocument();
 $app = JFactory::getApplication();
 $datatype = $app->input->get('datatype' ,'' , 'string');
 ?>
+<script>
+function updateYear(element) {
+  window.location =
+    window.location.href.split('?')[0] + '?year=' + element.value;
+}
+</script>
+<select id="manifest-year" onchange="updateYear(this);">
+<?php foreach($this->years as $year): ?>
+  <option <?php echo $year == $this->year ? 'selected="1"' : ''; ?>
+    value="<?php echo $year; ?>"><?php echo $year; ?></option>
+<?php endforeach; ?>
+</select>
 <?php if ($doc->getTitle()): ?>
 <h1><?php echo $doc->getTitle(); ?></h1>
 <?php endif; ?>

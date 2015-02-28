@@ -10,10 +10,27 @@ class ManifestViewManifest extends JViewLegacy {
     $user = JFactory::getUser();
     $profile = JUserHelper::getProfile($user->id);
 
-    $year = '2014';
+    $jinput = JFactory::getApplication()->input;
+    $year = $jinput->get('year', (int)date('Y'), 'int');
+
+    // 2002 - Now are valid years
+    $this->years = array();
+    for($i = (int)date('Y'); $i >= 2002; $i--) {
+      $this->years[] = $i;
+    }
+
+    // Mangle invalid years to current year
+    if (!in_array($year, $this->years)) {
+      $year = (int)date('Y');
+    }
+    $this->year = $year;
+
     $skywinId = $profile->lfk['skywin_id'];
 
+    // Database prefix to use to access the skywin database
     $d = 'skywin';
+
+    // Construct the Datatype -> SQL(s) map
     $sql_map = array(
   'top_loadmaster' => array(
 "SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadrole.Regdate)
