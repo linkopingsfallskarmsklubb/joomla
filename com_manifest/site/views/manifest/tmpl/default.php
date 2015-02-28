@@ -11,7 +11,7 @@ function updateYear(element) {
     window.location.href.split('?')[0] + '?year=' + element.value;
 }
 </script>
-<select id="manifest-year" onchange="updateYear(this);">
+<select id="manifest-year" class="manifest-param" onchange="updateYear(this);">
 <?php foreach($this->years as $year): ?>
   <option <?php echo $year == $this->year ? 'selected="1"' : ''; ?>
     value="<?php echo $year; ?>"><?php echo $year; ?></option>
