@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <layout title="COM_MANIFEST_VIEW_MANIFEST_TITLE">
+    <message>COM_MANIFEST_VIEW_MANIFEST_DESC</message>
+  </layout>
+
+  <fields name="request">
+    <fieldset name="request">
+      <field name="datatype" type="list" required="true"
+        label="COM_MANIFEST_DATATYPE_LABEL">
+        <option value="top_jumps">COM_MANIFEST_DATATYPE_TOP_JUMPS_TITLE</option>
+        <option value="top_drop">COM_MANIFEST_DATATYPE_TOP_DROP_TITLE</option>
+        <option value="top_loadmaster">COM_MANIFEST_DATATYPE_TOP_LOADMASTER_TITLE</option>
+        <option value="top_student">COM_MANIFEST_DATATYPE_TOP_STUDENT_TITLE</option>
+        <option value="club">COM_MANIFEST_DATATYPE_CLUB_TITLE</option>
+        <option value="aircraft">COM_MANIFEST_DATATYPE_AIRCRAFT_TITLE</option>
+        <option value="account">COM_MANIFEST_DATATYPE_ACCOUNT_TITLE</option>
+        <option value="jumps">COM_MANIFEST_DATATYPE_JUMPS_TITLE</option>
+      </field>
+    </fieldset>
+  </fields>
+</metadata>

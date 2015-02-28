@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.2.0" method="upgrade">
+  <name>com_manifest</name>
+  <creationDate>2015-02-25</creationDate>
+  <author>Linköpings Fallskärmsklubb</author>
+  <copyright>Linköpings Fallskärmsklubb</copyright>
+  <license>Creative Commons</license>
+  <authorEmail>info@linkopingsfallskarmsklubb.se</authorEmail>
+  <authorUrl>https://linkopingsfallskarmsklubb.se</authorUrl>
+  <version>1.0.2</version>
+  <description>Components for Manifest related pages</description>
+ 
+  <files folder="site">
+    <filename>manifest.php</filename>
+    <filename>controller.php</filename>
+    <folder>views</folder>
+  </files>
+ 
+  <administration>
+    <languages folder="admin">
+      <language tag="en-GB">language/en-GB.com_manifest.sys.ini</language>
+    </languages>
+  </administration>
+ 
+</extension>
