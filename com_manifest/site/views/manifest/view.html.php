@@ -5,20 +5,21 @@ class ManifestViewManifest extends JViewLegacy {
   function display($tpl = null)
   {
     $app = JFactory::getApplication();
-    $datatype = $app->input->get('datatype' ,'' , 'string');
+    $datatype = $app->input->get('datatype' ,'alla' , 'string');
 
     $user = JFactory::getUser();
     $profile = JUserHelper::getProfile($user->id);
 
     $jinput = JFactory::getApplication()->input;
     $year = $jinput->get('year', (int)date('Y'), 'int');
+    $jumptype = $jinput->get('type', 'alla', 'string');
 
     // Only use the year dropdown for top lists
     $this->showYears = strpos($datatype, 'top_') !== false;
 
-    // 2002 - Now are valid years
+    // 1999 - Now are valid years
     $this->years = array();
-    for($i = (int)date('Y'); $i >= 2002; $i--) {
+    for($i = (int)date('Y'); $i >= 1999; $i--) {
       $this->years[] = $i;
     }
 
@@ -113,10 +114,29 @@ class ManifestViewManifest extends JViewLegacy {
     $db = JFactory::getDbo();
     $this->results = array();
 
+    $db->setQuery("SELECT JumpType, JumpTypeName FROM $d.typejumps");
+    try {
+      $results = $db->loadRowList();
+    } catch (RuntimeException $e) {
+      throw new Exception($e->getMessage());
+    }
+    $this->jumptypes = $results;
+    $this->jumptype = 'alla';
+    foreach($this->jumptypes as $row){
+      if ($row[0] == $jumptype) {
+        $this->jumptype = $jumptype;
+        break;
+      }
+    }
+
     foreach($sql_map[$datatype] as $sql) {
       $db->setQuery($sql);
       try {
-        $results = $db->loadRowList();
+        if ($datatype == 'club') {
+          $results = $db->loadAssocList();
+        } else {
+          $results = $db->loadRowList();
+        }
       } catch (RuntimeException $e) {
         throw new Exception($e->getMessage());
       }
