@@ -181,9 +181,15 @@ class PlgUserLfk extends JPlugin {
   }
 
   public function onUserBeforeSave($user, $isNew, $data) {
+    if (!isset($data['lfk'])) {
+      $this->loadData($user['id'], $lfk);
+    } else {
+      $lfk = $data['lfk'];
+    }
+
     $db = JFactory::getDbo();
     $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
-      'MemberNo = "' . (int)$data['lfk']['license'] . '"');
+      'MemberNo = "' . (int)$lfk['license'] . '"');
     try {
       $results = $db->loadRowList();
     } catch (RuntimeException $e) {
@@ -217,7 +223,8 @@ class PlgUserLfk extends JPlugin {
       $db = JFactory::getDbo();
       $db->setQuery('SELECT profile_key, profile_value FROM #__user_profiles' .
         ' WHERE profile_key = "lfk.skywin_id" AND profile_value = ' .
-        (int)$skywinId . ' ORDER BY ordering');
+        (int)$skywinId . ' AND user_id != ' . (int)$user['id'] .
+        ' ORDER BY ordering');
       try {
         $results = $db->loadRowList();
       } catch (RuntimeException $e) {
@@ -231,7 +238,7 @@ class PlgUserLfk extends JPlugin {
       }
 
       // Validate the user (P.Nr == SkyWin P.Nr)
-      $pid = str_replace('-', '', $data['lfk']['pid']);
+      $pid = str_replace('-', '', $lfk['pid']);
       if (strlen($pid) < 10) {
         throw new Exception(
           JText::_('PLG_USER_LFK_FIELD_PID_TOO_SHORT'));
