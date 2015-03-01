@@ -70,7 +70,6 @@ class PlgUserLfk extends JPlugin {
     // TODO: Check for multiple matches, and alert.
     $result = $results[0];
 
-    $data['jumps'] = 140;
     $data['pid'] = $result[0];
     $data['firstname'] = $result[1];
     $data['lastname'] = $result[2];
@@ -105,6 +104,20 @@ class PlgUserLfk extends JPlugin {
 
     if (isset($results[0])) {
       $data['phone'] = $results[0][0];
+    }
+
+    $db->setQuery('SELECT Count(Regdate) FROM skywin.Loadjump ' .
+      'WHERE InternalNo = "' . (int)$skywinId . '"');
+
+    try {
+      $results = $db->loadRowList();
+    } catch (RuntimeException $e) {
+      $this->_subject->setError($e->getMessage());
+      return false;
+    }
+
+    if (isset($results[0])) {
+      $data['jumps'] = $results[0][0];
     }
     return true;
   }
