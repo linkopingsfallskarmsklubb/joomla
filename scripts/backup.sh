@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+export PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 mysqldump -u backup --all-databases > /tmp/mysqldump.sql 2> /dev/null
 
