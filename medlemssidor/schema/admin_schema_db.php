@@ -38,43 +38,56 @@ include("../../includes/db_connect.php");
   else if ($_GET['action'] == 'get_autocomplete') {
 
     // Instruktörer
-    $sql        = "SELECT * FROM instruktorer";
+    $sql        = "SELECT member.InternalNo, member.Firstname, member.LastName,
+      instructor.InstructType FROM skywin.member, skywin.memberinstruct AS instructor
+      WHERE instructor.InternalNo = member.InternalNo AND
+      instructor.Year = YEAR(CURDATE())";
     $result     = mysql_query($sql) or die(mysql_error());
-    $match_rows = mysql_num_rows($result) or die(mysql_error());
-  
-  
+    $match_rows = mysql_num_rows($result);
+
     $hoppledare  = "";
     $hoppmastare = "";
     $aff         = "";
-    $manifestor  = "";
 
     if ($match_rows != 0) {
       while ($row = mysql_fetch_array($result)) {
-        if ($row['hoppledare'] == 1) {
-          $hoppledare .= $row['fornamn'] ." ". $row['efternamn'] ."|". $row['id'] .",";
+        if ($row[3] == 'HL') {
+          $hoppledare .= $row[1] ." ". $row[2] ."|". $row[0] .",";
         }
-
-        if ($row['hoppmastare'] == 1) {
-          $hoppmastare .= $row['fornamn'] ." ". $row['efternamn'] ."|". $row['id'] .",";
+        if ($row[3] == 'HM') {
+          $hoppmastare .= $row[1] ." ". $row[2] ."|". $row[0] .",";
         }
-        if ($row['aff'] == 1) {
-          $aff .= $row['fornamn'] ." ". $row['efternamn'] ."|". $row['id'] .",";
-        }
-        if ($row['manifestor'] == 1) {
-          $manifestor .= $row['fornamn'] ." ". $row['efternamn'] ."|". $row['id'] .",";
+        if ($row[3] == 'AFF') {
+          $aff .= $row[1] ." ". $row[2] ."|". $row[0] .",";
         }
       }
     }
 
-    // Piloter
-    $sql        = "SELECT * FROM piloter";
+    // Manifestorer
+    $sql        = "SELECT member.InternalNo, member.Firstname, member.LastName
+      FROM skywin.member, skywin.memberclubfunction AS function
+      WHERE function.InternalNo = member.InternalNo
+      AND function.ClubfunctionType = 'MANIFEST'";
     $result     = mysql_query($sql) or die(mysql_error());
-    $match_rows = mysql_num_rows($result) or die(mysql_error());
-    
+    $match_rows = mysql_num_rows($result);
+
+    $manifestor  = "";
+    if ($match_rows != 0) {
+      while ($row = mysql_fetch_array($result)) {
+        $manifestor .= $row[1] ." ". $row[2] ."|". $row[0] .",";
+      }
+    }
+
+    // Piloter
+    $sql        = "SELECT InternalNo, FirstName, LastName
+      FROM skywin.member WHERE Pilot = 'Y'";
+    $result     = mysql_query($sql) or die(mysql_error());
+    $match_rows = mysql_num_rows($result);
+
     $pilot = "";
     if ($match_rows != 0) {
       while ($row = mysql_fetch_array($result)) {
-        $pilot .= $row['fornamn'] ." ". $row['efternamn'] ."|". $row['id'] .",";
+        $pilot .= $row[1] ." ". $row[2] ."|". $row[0] .",";
       }
     }
 
@@ -102,18 +115,18 @@ include("../../includes/db_connect.php");
   //------------------------------------------------------------------
 
   else if ($_GET['action'] == 'jump_hours') {
-    
+
     $wd = $_GET["wd"];
 
     // Query database (jump_hours)
     $query      = "SELECT start_time, stop_time FROM jump_hours WHERE weekday = '$wd'";
     $result     = mysql_query($query) or die(mysql_error());
-    $row        = mysql_fetch_array($result) or die(mysql_error());
-    
+    $row        = mysql_fetch_array($result);
+
     // Add to the ajax response string.
     $response  = "['start_time','". substr($row['start_time'],0,5) ."'],";
     $response .= "['stop_time','".  substr($row['stop_time'],0,5)  ."']";
-   
+
     echo($response);
   }
 
@@ -123,13 +136,12 @@ include("../../includes/db_connect.php");
   //-------------------------------------------
 
   else if ($_GET['action'] == 'get_day_info') {
-  
+
     $date       = $_GET["date"];
     $sql        = "SELECT * FROM hopp_schema WHERE (datum = '". $date ."')";
     $result     = mysql_query($sql) or die(mysql_error());
     $match_rows = mysql_num_rows($result) or die(mysql_error());
-  
-  
+
     // Add to the ajax response string.
     $response = "";
     if ($match_rows != 0) {
@@ -223,7 +235,7 @@ include("../../includes/db_connect.php");
   //-------------------------------------------
   // New day
   //-------------------------------------------
-  
+
   else if ($_GET['action'] == 'new_day') {
 
     // If date exists, update
@@ -253,7 +265,7 @@ include("../../includes/db_connect.php");
 
     // Get id for selected date
     $result   = mysql_query("SELECT id FROM hopp_schema WHERE datum = '$_GET[datum]'") or die(mysql_error());
-    $row      = mysql_fetch_array($result) or die(mysql_error());
+    $row      = mysql_fetch_array($result);
     $id_datum = $row[id];
 
 
@@ -321,29 +333,29 @@ include("../../includes/db_connect.php");
     }
 
     echo("ok");
-  } 
+  }
 
   //-------------------------------------------
   // Remove day
   //-------------------------------------------
 
   else if ($_GET['action'] == 'remove_day') {
-    
+
     $datum = $_GET['date'];
 
     $result = mysql_query("SELECT * FROM hopp_schema WHERE datum = '$datum'") or die(mysql_error());
     $row    = mysql_fetch_array($result);
     $id     = $row['id'];
-  
+
     mysql_query("DELETE FROM hopp_schema_pilot    WHERE id_datum = '$id'") or die(mysql_error());
     mysql_query("DELETE FROM hopp_schema_hl       WHERE id_datum = '$id'") or die(mysql_error());
     mysql_query("DELETE FROM hopp_schema_manifest WHERE id_datum = '$id'") or die(mysql_error());
     mysql_query("DELETE FROM hopp_schema_hm       WHERE id_datum = '$id'") or die(mysql_error());
     mysql_query("DELETE FROM hopp_schema_aff      WHERE id_datum = '$id'") or die(mysql_error());
     mysql_query("DELETE FROM hopp_schema          WHERE id       = '$id'") or die(mysql_error());
-    
+
     echo("ok");
-  } 
+  }
 
 
 // Close database connection
