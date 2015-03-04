@@ -1,0 +1,42 @@
+
+html#content, body#content, div#content, span#content, applet#content, object#content, iframe#content,
+h1#content, h2#content, h3#content, h4#content, h5#content, h6#content, p#content, blockquote#content, pre#content,
+a#content, abbr#content, acronym#content, address#content, big#content, cite#content, code#content,
+del#content, dfn#content, em#content, font#content, img#content, ins#content, kbd#content, q#content, s#content, samp#content,
+small#content, strike#content, strong#content, sub#content, sup#content, tt#content, var#content,
+dl#content, dt#content, dd#content, ol#content, ul#content, li#content,
+fieldset#content, form#content, label#content, legend#content,
+table#content, caption#content, tbody#content, tfoot#content, thead#content, tr#content, th#content, td#content {
+	margin:         0;
+	padding:        0;
+	border:         0;
+	outline:        0;
+	font-weight:    inherit;
+	font-style:     inherit;
+	font-size:      100%;
+	font-family:    inherit;
+	vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+ol#content, ul#content {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table#content {
+	border-collapse: separate;
+	border-spacing:  0;
+}
+caption#content, th#content, td#content {
+	text-align:  left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}

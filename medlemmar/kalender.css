@@ -1,0 +1,165 @@
+
+/* --- Main list --- */
+
+#header_div {
+  float: left;
+}
+
+#new_button_div {
+  float: right;
+}
+
+#events {
+  clear:            both;
+  margin-top:       20px;
+  overflow:         auto;
+  border:           1px solid #aaaaaa;
+  background-color: #e7e7e7;
+}
+
+.events_wrapper {
+  margin:           10px;
+  padding:          10px;
+  padding-bottom:   20px;
+  background-color: #ffffff;
+  border:           1px solid #aaaaaa;
+}
+
+.events_h {
+  padding:     0;
+  margin:      0;
+  font-size:   1.2em;
+  font-weight: bold;
+  color:       #2976C3; 
+}
+
+.events_date {
+  color:       #333333;
+	font-size:   0.9em;
+	font-style:  italic;
+  padding:     0;
+  margin:      0;
+}
+
+.events_loc {
+  color:       #333333;
+	font-size:   0.9em;
+	font-style:  italic;
+  padding:     0;
+  margin:      0;
+}
+
+.events_text {
+  padding:        0;
+  margin:         0;
+  margin-bottom:  10px;
+}
+
+.events_file {
+  padding: 0;
+  margin:  0;
+}
+
+.events_border {
+  padding:       0;
+  margin:        0;
+  margin-bottom: 10px;
+  border-top:    1px solid #eeeeee;
+}
+
+
+
+
+/* --- New / Edit --- */
+
+#new_popup {
+  width:     700px;
+  max-width: 95%;
+}
+
+#new_popup ul {
+  overflow: hidden;
+}
+#new_popup li {
+  overflow: hidden;
+}
+
+
+#new_form {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+#new_form_heading {
+  min-width: 200px;
+}
+
+#new_form_text {
+  height:    200px;
+  min-width: 200px;
+}
+
+.popup_submit {
+  clear:      both;
+  float:      left;
+  width:      100%;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.c1 {
+  clear: both;
+  float: left;
+  width: 90px;
+}
+
+.c2 {
+  float: left;
+  clear: none;
+  width: 200px;
+}
+.c2s {
+  float: left;
+  clear: none;
+  width: 80px !important;
+}
+
+.date {
+  float: left;
+  clear: none;
+  width: 80px !important;
+}
+.time {
+  float: left;
+  clear: none;
+  margin-left: 10px !important;
+  width: 40px !important;
+}
+.req {
+  float: left;
+  width: 10px;
+  height: 10px;
+}
+
+
+.new_attachment_val {
+  float:     left;
+  clear:     none;
+  min-width: 110px;
+}
+
+
+.file_div {
+  float:     left;
+  clear:     none;
+  min-width: 210px;
+}
+
+.fileToUpload {
+  display: none;
+}
+
+#error {
+  color:   red;
+}

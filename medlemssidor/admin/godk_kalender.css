@@ -1,0 +1,87 @@
+/* --- Approve/deny buttons --- */
+
+.buttons {
+  float: right;
+}
+.button {
+ width: 100px;
+}
+
+
+/* --- Main list --- */
+
+#header_div {
+  float: left;
+}
+
+#events {
+  clear:            both;
+  margin-top:       20px;
+  overflow:         auto;
+}
+
+.events_wrapper {
+  margin-bottom:    20px;
+  padding:          10px;
+  background-color: #ffffff;
+  border:           1px solid #aaaaaa;
+}
+
+.events_icon {
+  margin:      0;
+  padding:     0;
+}
+
+.events_h {
+  padding:     0;
+  margin:      0;
+  font-size:   1.2em;
+  font-weight: bold;
+  color:       #2976C3; 
+}
+
+.events_date {
+  color:       #333333;
+	font-size:   0.9em;
+	font-style:  italic;
+  padding:     0;
+  margin:      0;
+}
+
+.events_loc {
+  color:       #333333;
+	font-size:   0.9em;
+	font-style:  italic;
+  padding:     0;
+  margin:      0;
+}
+
+.events_text {
+  padding:        0;
+  margin:         0;
+  margin-bottom:  10px;
+}
+
+.events_file {
+  padding: 0;
+  margin:  0;
+}
+
+.events_border {
+  padding:       0;
+  margin:        0;
+  margin-bottom: 10px;
+  border-top:    1px solid #eeeeee;
+}
+
+
+/* --- Result box --- */
+
+#result p {
+  clear:      both;
+  float:      left;
+  margin:     0 0 20px 0;
+  padding:    10px;
+  color:      green;
+  border:     1px solid #999;
+}

@@ -1,0 +1,18 @@
+#jump_hours {
+  float: left;
+}
+
+.c1 {
+  float: left;
+  width: 80px;
+}
+
+.c2 {
+  float: left;
+}
+.c2.time label,
+.c2.time input {
+  float:        left;
+  width:        40px !important;
+  margin-right: 6px  !important;
+}

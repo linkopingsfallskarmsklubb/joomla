@@ -1,0 +1,54 @@
+
+#form { 
+ float:         left;
+ margin-right:  20px;
+ margin-bottom: 20px;
+ padding:       20px;
+ border:        1px solid #999;
+}
+
+#success {
+ display:       none;
+ float:         left;
+ border:        none;
+}
+
+
+#error {
+ display: none;
+ float:   left;
+ padding: 20px;
+ border:  1px solid #999;
+}
+
+#error_msg {
+  color: red;
+}
+
+
+
+/* Text fields */
+
+.label_div {
+  float: left;
+  width: 130px;
+}
+
+.input_div {
+  float: left;
+}
+.input_div > input {
+  width: 240px !important;
+}
+
+
+
+/* Submit button */
+
+.button_div {
+  float:       left;
+  width:       240px !important;
+  padding-top: 20px;
+}
+
+

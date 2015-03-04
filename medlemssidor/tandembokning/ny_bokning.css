@@ -1,0 +1,244 @@
+a.tooltip span {
+  display: none;
+  padding: 2px 3px;
+  margin-left: 38px;
+  width: auto; }
+
+a.tooltip:hover span {
+  display: inline;
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  color: #6c6c6c; }
+
+/****************************************************/
+/*   Tabs                                           */
+/****************************************************/
+.tab {
+  float: left;
+  position: relative;
+  top: 1px;
+  width: 120px;
+  height: 40px;
+  margin-right: 5px;
+  text-align: center;
+  line-height: 18px; }
+  .tab.tab_active {
+    color: #000000;
+    background: #f7f7f7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#f7f7f7));
+    background: -moz-linear-gradient(top, #f7f7f7, #f7f7f7);
+    border: 1px solid #999999;
+    border-bottom: 1px solid #f7f7f7 !important; }
+  .tab.tab_inactive {
+    color: #333333;
+    background: #dddddd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#cccccc));
+    background: -moz-linear-gradient(top, #999999, #cccccc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#cccccc');
+    border: 1px solid #999999;
+    border-bottom: 1px solid #999999 !important; }
+
+/****************************************************/
+/* Steps                                            */
+/****************************************************/
+#step_1,
+#step_2,
+#step_3 {
+  clear: both;
+  width: 100%;
+  border: 1px solid #999999;
+  background-color: #f7f7f7;
+  padding: 10px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#step_2 {
+  display: none; }
+
+#step_3 {
+  display: none; }
+
+/****************************************************/
+/* Step 1                                           */
+/****************************************************/
+#s1_calendar_wrapper {
+  float: left;
+  clear: both;
+  padding: 20px 20px 0 0; }
+
+#calendar_info {
+  clear: both;
+  margin-left: 60px; }
+
+#calendar_info td {
+  border: none; }
+
+#s1_sel_pilot_wrapper {
+  float: left;
+  padding: 20px 0px;
+  display: none; }
+
+#booked_pilots {
+  clear: both;
+  overflow: auto; }
+
+/****************************************************/
+/* Step 2                                           */
+/****************************************************/
+.disabled {
+  color: #999 !important; }
+
+.c1 {
+  clear: both;
+  float: left;
+  width: 110px !important; }
+
+.c2 {
+  float: left;
+  clear: none;
+  width: 250px !important; }
+
+input[type="checkbox"].c2 {
+  width: auto !important; }
+
+.c2_d {
+  float: left;
+  clear: none;
+  width: 260px !important; }
+
+.c2_p {
+  float: left;
+  clear: none;
+  width: 50px !important;
+  margin-right: 3px  !important; }
+
+.c2_o {
+  float: left;
+  clear: none;
+  width: 187px !important; }
+
+#s2_p1_left {
+  margin-right: 40px; }
+
+#s2_pax {
+  margin-right: 40px; }
+
+.s2_hspacer {
+  float: left;
+  width: 40px;
+  height: 20px; }
+
+.s2_form {
+  float: left;
+  width: auto;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none; }
+
+.wide {
+  width: 100%;
+  padding: 0px; }
+
+.cr {
+  clear: both   !important; }
+
+.right {
+  float: right !important;
+  text-align: right  !important; }
+
+.center {
+  text-align: center !important; }
+
+/****************************************************/
+/* Presentkort popup                                */
+/****************************************************/
+#s2_pk_popup {
+  width: 80% !important;
+  height: 80% !important;
+  left: 10% !important;
+  top: 10% !important;
+  padding: 0px !important; }
+
+#s2_pk_wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#s2_pk_filter {
+  float: right;
+  width: auto;
+  margin-bottom: 10px; }
+
+#s2_pk_content {
+  clear: both;
+  width: 100%;
+  margin-top: 40px; }
+
+#s2_pk_table {
+  width: 100%; }
+
+.space {
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 0px !important;
+  background-color: #eeeeee !important; }
+
+/****************************************************/
+/* Photo popup                                      */
+/****************************************************/
+#s2_ph_sched_popup {
+  display: none;
+  min-width: 150px;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
+
+.t00 {
+  border: 1px solid  !important;
+  border-bottom: 1px dotted !important; }
+
+.t30 {
+  border: 1px solid !important;
+  border-top: 0px !important; }
+
+.photo_schedule_booked.half_1 {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff4400), to(#cc2200));
+  background: -moz-linear-gradient(top, #ff4400, #cc2200);
+  border-bottom: none !important; }
+
+.photo_schedule_booked.half_2 {
+  background: -webkit-gradient(linear, left top, left bottom, from(#cc2200), to(#ff4400));
+  background: -moz-linear-gradient(top, #cc2200, #ff4400);
+  border-top: none !important; }
+
+.photo_schedule_avail {
+  cursor: pointer; }
+
+.photo_schedule_avail.half_1 {
+  background: -webkit-gradient(linear, left top, left bottom, from(lime), to(#00cc00));
+  background: -moz-linear-gradient(top, lime, #00cc00);
+  border-bottom: none !important; }
+
+.photo_schedule_avail.half_2 {
+  background: -webkit-gradient(linear, left top, left bottom, from(#00cc00), to(lime));
+  background: -moz-linear-gradient(top, #00cc00, lime);
+  border-top: none !important; }
+
+.photo_schedule_avail_hover {
+  background: #00ff00 !important; }
+
+.photo_schedule_unavail {
+  background-color: #aaaaaa; }

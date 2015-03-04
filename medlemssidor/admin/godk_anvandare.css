@@ -1,0 +1,54 @@
+
+#header {
+  float:        left;
+  margin-right: 50px;
+}
+
+#result p {
+  clear:      both;
+  float:      left;
+  margin:     0 0 20px 0;
+  padding:    10px;
+  color:      green;
+  border:     1px solid #999;
+}
+
+#list {
+ clear:    both;
+}
+
+
+.entry {
+  border:  1px solid #999;
+  padding: 20px;
+  margin:  0 0 20px 0;
+}
+
+.details {
+  clear: both;
+  float: left;
+}
+
+.buttons {
+  float: right;
+}
+
+.c1 {
+  clear:       both;
+  float:       left;
+  width:       125px;
+  font-weight: bold;
+}
+
+.c2 {
+  float:        left;
+  clear:        none;
+  margin-right: 20px;
+}
+
+.button {
+  width: 100px;
+}
+
+
+

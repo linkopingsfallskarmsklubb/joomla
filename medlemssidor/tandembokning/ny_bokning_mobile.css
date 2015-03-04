@@ -1,0 +1,67 @@
+/* ====================== */
+/* ! Mobile Style Sheet   */
+/* ====================== */
+
+/* Smaller screens */
+@media only screen and (max-width: 1023px) {
+}
+
+
+
+/* Mobile */
+@media handheld, only screen and (max-width: 767px) {
+
+
+  /* Tabs */
+  .tab_info {
+    display: none;
+  }
+
+  .tab {
+    width:  50px !important;
+    height: 20px !important;
+  }
+
+
+  /* Content */
+  #step_1,
+  #step_2,
+  #step_3 {
+    padding-left:  1%;
+    padding-right: 1%;
+  }
+
+  #s1_calendar_wrapper {
+    padding:     5px;
+    padding-top: 20px;
+  }
+
+  #s1_sel_pilot_wrapper {
+    padding:     5px;
+    padding-top: 20px;
+  }
+
+
+  .s2_hspacer {
+    width: 0px;
+  }
+
+
+
+  /* Presentkort */
+  #s2_pk_popup { 
+    width:              100% !important;
+    height:             100% !important;
+    left:               0% !important;
+    top:                0% !important;
+  }
+
+  #s2_pk_filter {
+    clear: both;
+    float: left;
+  }
+
+}
+
+
+

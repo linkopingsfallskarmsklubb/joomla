@@ -1,0 +1,78 @@
+/*---------------------------------------*/
+/* Main list                             */
+/*---------------------------------------*/
+
+
+#main_list {
+  float:        left;
+  margin-right: 100px;
+}
+
+.licensnr {
+  text-align: right;
+}
+
+.button {
+  width: 100px;
+  margin-top: 20px;
+}
+
+
+
+/*---------------------------------------*/
+/* Popup                                 */
+/*---------------------------------------*/
+
+.popup {
+  clear:      both;
+  max-width:  80% !important;
+  max-height: 80% !important;
+  height:     80% !important;
+}
+
+
+#full_list {
+  float:      left;
+  margin:     0 50px 0 0;
+  overflow:   auto;
+  max-width:  95%;
+}
+#new_table {
+  width: 400px;
+}
+.new_licensnr {
+  text-align: right;
+  width:      60px;
+}
+.new_club {
+  text-align: center;
+  width:      60px;
+}
+
+
+
+
+#filter {
+  float:      right;
+  text-align: center;
+}
+#filter_field {
+  padding: 10px !important;
+}
+#filter_year {
+  width: 80px !important;
+}
+.f1 {
+  clear:   both;
+  float:   left;
+  width:   140px;
+}
+.f2 {
+  display: block;
+  float:   left;
+}
+
+
+
+
+

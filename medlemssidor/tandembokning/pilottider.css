@@ -1,0 +1,154 @@
+
+.img_time {
+  cursor: pointer;
+  width:  25px;
+  height: 25px;
+}
+
+.img {
+  cursor: pointer;
+  width:  13px;
+  height: 13px;
+}
+
+.img_off {
+  width:  13px;
+  height: 13px;
+}
+
+
+/****************************************************/
+/*   Step 1                                         */
+/****************************************************/
+
+#step_1 {
+  float:              left;
+  clear:              left;
+  padding:            10px; 
+  margin:             0px 10px 20px 0px; 
+  border:             1px solid #aaaaaa;
+  background:         #f8f8f8;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+}
+
+#schema_varning {
+  float:      left;
+  color:      red;
+}
+
+/****************************************************/
+/*   Step 2                                         */
+/****************************************************/
+
+#step_2 {
+  display:            none;
+  float:              left;
+  padding:            10px; 
+  margin:             0px 10px 20px 0px; 
+  border:             1px solid #aaaaaa;
+  background:         #f8f8f8;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+}
+
+#booked_pilots {
+  margin-top: 30px;
+}
+
+#booked_pilots p {
+  margin:      0px;
+  font-weight: bold;
+}
+
+
+#delete_pilot_booking {
+ width:       auto;
+ height:      auto;
+}
+
+
+.c1 {
+  clear:       both;
+  width:       80px;
+  font-weight: bold;
+}
+.c2 {
+  clear: none;
+}
+
+
+/****************************************************/
+/*   Step 3                                         */
+/****************************************************/
+
+#step_3 {
+  display:            none;
+  float:              left;
+  padding:            10px; 
+  margin:             0px 0px 20px 0px; 
+  border:             1px solid #aaaaaa;
+  background:         #f8f8f8;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+}
+
+
+#times {
+  float: left;
+}
+
+#select_times_table {
+ align:       center;
+ border:      0;
+ cellpadding: 0;
+ cellspacing: 0;
+}
+
+
+#times_submit {
+  margin: 20px 5px;
+}
+
+#change_times {
+  float:              left; 
+  width:              80px;
+  margin-left:        15px; 
+  margin-top:         35px; 
+  padding:            5px; 
+  border:             1px solid #000; 
+  background-color:   #aaaaaa;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+}
+
+#change_times > div {
+  width:              100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+}
+
+td.booked {
+  color:       red;
+  font-weight: bold;
+}
+
+td.checked {
+  font-weight: bold;
+}
+

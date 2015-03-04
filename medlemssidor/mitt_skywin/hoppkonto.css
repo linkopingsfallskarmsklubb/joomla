@@ -1,0 +1,22 @@
+
+
+#summary_div {
+  clear:    both; 
+  padding:  0 0 20px 0;
+}
+
+#summary_table td {
+  border: none;
+  padding: 0 20px 0 0;
+}
+
+#account_div {
+  clear:    both; 
+  padding:  0;
+  overflow: auto;
+}
+
+
+.amount {
+  text-align: right !important;
+}

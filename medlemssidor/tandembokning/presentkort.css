@@ -1,0 +1,121 @@
+/*---------------------------------------*/
+/* Filter box                            */
+/*---------------------------------------*/
+#filter {
+  float: left;
+  width: auto;
+  margin-bottom: 10px; }
+  #filter #filter_field {
+    padding: 10px !important; }
+  #filter #filter_sel {
+    width: 120px !important; }
+  #filter .f1 {
+    clear: both;
+    float: left;
+    width: 140px; }
+  #filter .f2 {
+    display: block;
+    float: left; }
+
+/*---------------------------------------*/
+/* Main list                             */
+/*---------------------------------------*/
+#table_container {
+  clear: both;
+  margin-top: 40px;
+  overflow: auto; }
+
+/*---------------------------------------*/
+/* Popups                                */
+/*---------------------------------------*/
+.popup_header {
+  float: left; }
+
+.popup_header_info {
+  float: right;
+  font-style: italic; }
+
+.div_pax {
+  clear: both;
+  float: left;
+  width: auto;
+  padding-right: 30px; }
+
+.div_kontakt {
+  float: left;
+  width: auto; }
+  .div_kontakt.disabled {
+    color: #999 !important; }
+
+.div_misc_1,
+.div_misc_2 {
+  clear: both;
+  float: left;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.div_submit {
+  clear: both;
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px; }
+
+.divider {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#new_error,
+#edit_error {
+  clear: both;
+  float: left;
+  color: #f00; }
+
+.error {
+  color: #f00;
+  margin-left: 20px; }
+
+.c1 {
+  clear: both;
+  float: left;
+  width: 80px; }
+  .c1.le1 {
+    width: 100px; }
+  .c1.le2 {
+    width: 120px; }
+
+.c2_wrapper {
+  float: left;
+  clear: none;
+  width: 210px; }
+
+.c2 {
+  float: left;
+  clear: none; }
+  .c2.le1 {
+    width: 35px; }
+  .c2.le2 {
+    width: 50px;
+    margin-right: 3px; }
+  .c2.le3 {
+    width: 80px; }
+  .c2.le4 {
+    width: 100px; }
+  .c2.le5 {
+    width: 137px; }
+
+/*---------------------------------------*/
+/* Delete confirm popup                  */
+/*---------------------------------------*/
+#delete_popup {
+  padding-left: 40px !important;
+  padding-right: 40px !important; }

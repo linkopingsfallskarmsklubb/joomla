@@ -1,0 +1,115 @@
+
+
+/*---------------------------------------*/
+/* User table                            */
+/*---------------------------------------*/
+
+
+
+#filter {
+  float:         left;
+  width:         auto;
+  margin-bottom: 10px;
+}
+
+#filter_field {
+  padding: 10px !important;
+}
+
+#filter_sel {
+  width: 90px !important;
+}
+
+#list {
+ clear:    both;
+ overflow: auto;
+}
+
+
+/*---------------------------------------*/
+/* Details popup                         */
+/*---------------------------------------*/
+
+#div_details {
+  float:        left;
+  width:        auto;
+  padding:      0px 20px;
+  border-right: 1px solid #999;
+}
+
+#div_misc {
+  float:        left;
+  width:        auto;
+  padding:      0px 20px;
+  border-right: 1px solid #999;
+}
+
+#div_groups {
+  float:   left;
+  width:   auto;
+  padding: 0px 20px;
+}
+
+#div_submit {
+  float:      left;
+  clear:      both;
+  width:      100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.img {
+  cursor: pointer;
+  width:  13px;
+  height: 13px;
+}
+
+
+.c1 {
+  float:       left;
+  width:       125px;
+}
+
+.c2 {
+  float: left;
+  clear: none;
+}
+
+
+
+
+/* Classes for mobile view */
+
+
+.div_details_m {
+  clear:          both !important;
+  height:         auto !important;
+  padding-bottom: 20px !important;
+  border:         0    !important;
+}
+
+.div_misc_m {
+  clear:          both !important;
+  height:         auto !important;
+  padding-bottom: 20px !important;
+  border:         0    !important;
+}
+
+.div_groups_m {
+  clear:          both !important;
+  height:         auto !important;
+  padding-bottom: 20px !important;
+  border:         0    !important;
+}
+
+
+
+/*---------------------------------------*/
+/* Delete confirm popup                  */
+/*---------------------------------------*/
+
+#delete_popup {
+  padding-left:  50px !important;
+  padding-right: 50px !important;
+}

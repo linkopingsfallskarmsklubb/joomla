@@ -1,0 +1,155 @@
+ 
+    <!-- Edit 'presentkort' -->
+
+<!--
+    <div id='edit_popup' class='popup'>
+      <div class='close'>
+        <span class='icon-remove-sign icon-large icon-st-lightblue icon-st-shadow icon-st-click' onclick="$('#edit_popup, #overlay').popHide();"></span>
+      </div>
+        <table name='edit_form' id='edit_form' align='center' border='0'>
+          <tr><td colspan='3'><h2>Ändra presentkort</h2></td><td><i>Presentkortnr:</i></td><td id='edit_pknr'>      </td></tr>
+          <tr><td colspan='3'>&nbsp;</td>                  <td><i>Skapad:</i></td>       <td id='edit_tillagd'>   </td></tr>
+          <tr><td colspan='3'>&nbsp;</td>                  <td><i>Modifierad:</i></td>   <td id='edit_modifierad'></td></tr>
+          <tr><td colspan='5'><hr/></td></tr>
+          <tr>
+            <td colspan='2'><b>Pax</b></td>
+            <td width='30px'>&nbsp;</td>
+            <td colspan='2'><b>Kontakt</b></td>
+          </tr>
+          <tr>
+            <td width='100'>Förnamn:        </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_fornamn'        id='edit_pax_fornamn'        value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Förnamn:        </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_fornamn'    id='edit_kontakt_fornamn'    value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>Efternamn:      </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_efternamn'      id='edit_pax_efternamn'      value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Efternamn:      </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_efternamn'  id='edit_kontakt_efternamn'  value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>Adress 1:       </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_adress_1'       id='edit_pax_adress_1'       value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Adress 1:       </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_adress_1'   id='edit_kontakt_adress_1'   value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>Adress 2:       </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_adress_2'       id='edit_pax_adress_2'       value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Adress 2:       </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_adress_2'   id='edit_kontakt_adress_2'   value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>P-nr / ort:     </td><td><input type='text'     style='width: 50px;  border: 1px #999 solid' name='edit_pax_postnummer'     id='edit_pax_postnummer'     value=''/>&nbsp;<input type='text' style='width: 142px; border: 1px #999 solid' name='edit_pax_ort'     id='edit_pax_ort'     value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>P-nr / ort:     </td><td><input type='text'     style='width: 50px;  border: 1px #999 solid' name='edit_kontakt_postnummer' id='edit_kontakt_postnummer' value=''/>&nbsp;<input type='text' style='width: 142px; border: 1px #999 solid' name='edit_kontakt_ort' id='edit_kontakt_ort' value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>Telefon:        </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_telefon'        id='edit_pax_telefon'        value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Telefon:        </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_telefon'    id='edit_kontakt_telefon'    value=''/></td>
+          </tr>
+          <tr>
+            <td width='100'>Email:          </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_pax_email'          id='edit_pax_email'          value=''/></td>
+            <td>&nbsp;</td>
+            <td width='100'>Email:          </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_kontakt_email'      id='edit_kontakt_email'      value=''/></td>
+          </tr>
+          <tr><td colspan='5'><hr/></td></tr>
+          <tr><td width='100'>Längd:          </td><td id='edit_pax_langd_td'><input type='text'     style='width: 50px; border: 1px #999 solid' name='edit_pax_langd'         id='edit_pax_langd'          value=''/></td></tr>
+          <tr><td width='100'>Vikt:           </td><td id='edit_pax_vikt_td'><input type='text'     style='width: 50px; border: 1px #999 solid' name='edit_pax_vikt'          id='edit_pax_vikt'           value=''/></td></tr>
+          <tr><td width='100'>Video:          </td><td><input type='checkbox' style='             border: 1px #999 solid' name='edit_video'             id='edit_video'              value=''/></td></tr>
+          <tr><td width='100'>Foto:           </td><td><input type='checkbox' style='             border: 1px #999 solid' name='edit_foto'              id='edit_foto'               value=''/></td></tr>
+          <tr><td colspan='5'><hr/></td></tr>
+          <tr><td width='100'>Hoppat:         </td><td><input type='checkbox' style='              border: 1px #999 solid' name='edit_hoppat'           id='edit_hoppat'             value=''/></td></tr>
+          <tr><td width='100'>Betalat:        </td><td><input type='text'     style='width: 100px; border: 1px #999 solid' name='edit_betalat'          id='edit_betalat'            value=''/></td></tr>
+          <tr><td width='100'>Giltigt t.o.m.: </td><td id='edit_giltigt_till_td'><input type='text'     style='width: 100px; border: 1px #999 solid' name='edit_giltigt_till'      id='edit_giltigt_till'        value=''/></td></tr>
+          <tr><td width='100'>Övrigt:         </td><td><input type='text'     style='width: 200px; border: 1px #999 solid' name='edit_ovrigt'           id='edit_ovrigt'             value=''/></td></tr>
+          <tr><td>&nbsp;</td></tr>
+          <tr>
+            <td></td>
+            <td><input class='button' type='submit' name='edit_submit' id='edit_submit' value='Spara'   onclick="edit_submit_f();"/></td>
+            <td><input class='button' type='button' name='edit_abort'  id='edit_abort'  value='Avbryt'  onclick="$('#edit_popup, #overlay').popHide();"/></td>
+          </tr>
+        </table>
+        <input type='hidden' name='edit_id' id='edit_id'/>
+    </div>
+-->
+
+
+
+
+    <!-- Details -->
+<!--
+    <div id='details_popup' class='popup'>
+      <div class='close'>
+        <span class='icon-remove-sign icon-large icon-st-lightblue icon-st-shadow icon-st-click' onclick="$('#details_popup, #overlay').popHide();"></span>
+      </div>
+      <table align='center' border='0'>
+        <tr><td colspan='3'><h2>Detaljer</h2></td><td><i>Presentkortnr:</i></td><td id='det_pknr'>      </td></tr>
+        <tr><td colspan='3'>&nbsp;</td>         <td><i>Skapad:</i></td>       <td id='det_tillagd'>   </td></tr>
+        <tr><td colspan='3'>&nbsp;</td>         <td><i>Modifierad:</i></td>   <td id='det_modifierad'></td></tr>
+        <tr><td colspan='5'><hr/></td></tr>
+        <tr>
+          <td colspan='2'><b>Pax</b></td>
+          <td width='30px'>&nbsp;</td>
+          <td colspan='2'><b>Kontakt</b></td>
+        </tr>
+        <tr>
+          <td width='100'>Förnamn:        </td><td name='det_pax_fornamn'        id='det_pax_fornamn'        ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Förnamn:        </td><td name='det_kontakt_fornamn'    id='det_kontakt_fornamn'    ></td>
+        </tr>
+        <tr>
+          <td width='100'>Efternamn:      </td><td name='det_pax_efternamn'      id='det_pax_efternamn'      ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Efternamn:      </td><td name='det_kontakt_efternamn'  id='det_kontakt_efternamn'  ></td>
+        </tr>
+        <tr>
+          <td width='100'>Adress 1:       </td><td name='det_pax_adress_1'       id='det_pax_adress_1'       ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Adress 1:       </td><td name='det_kontakt_adress_1'   id='det_kontakt_adress_1'   ></td>
+        </tr>
+        <tr>
+          <td width='100'>Adress 2:       </td><td name='det_pax_adress_2'       id='det_pax_adress_2'       ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Adress 2:       </td><td name='det_kontakt_adress_2'   id='det_kontakt_adress_2'   ></td>
+        </tr>
+        <tr>
+          <td width='100'>P-nr / ort:     </td><td name='det_pax_postnummer'     id='det_pax_postnummer'     ></td>
+          <td>&nbsp;</td>
+          <td width='100'>P-nr / ort:     </td><td name='det_kontakt_postnummer' id='det_kontakt_postnummer' ></td>
+        </tr>
+        <tr>
+          <td width='100'>Telefon:        </td><td name='det_pax_telefon'        id='det_pax_telefon'        ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Telefon:        </td><td name='det_kontakt_telefon'    id='det_kontakt_telefon'    ></td>
+        </tr>
+        <tr>
+          <td width='100'>Email:          </td><td name='det_pax_email'          id='det_pax_email'          ></td>
+          <td>&nbsp;</td>
+          <td width='100'>Email:          </td><td name='det_kontakt_email'      id='det_kontakt_email'      ></td>
+        </tr>
+        <tr><td colspan='5'><hr/></td></tr>
+        <tr><td width='100'>Längd:          </td><td name='det_pax_langd'         id='det_pax_langd'          ></td></tr>
+        <tr><td width='100'>Vikt:           </td><td name='det_pax_vikt'          id='det_pax_vikt'           ></td></tr>
+        <tr><td width='100'>Video:          </td><td name='det_video'             id='det_video'              ></td></tr>
+        <tr><td width='100'>Foto:           </td><td name='det_foto'              id='det_foto'               ></td></tr>
+        <tr><td colspan='5'><hr/></td></tr>
+        <tr><td width='100'>Hoppat:         </td><td name='det_hoppat'            id='det_hoppat'             ></td></tr>
+        <tr><td width='100'>Betalat:        </td><td name='det_betalat'           id='det_betalat'            ></td></tr>
+        <tr><td width='100'>Giltigt t.o.m.: </td><td name='det_giltigt_tom'       id='det_giltigt_tom'        ></td></tr>
+        <tr><td width='100'>Övrigt:         </td><td name='det_ovrigt'            id='det_ovrigt'             ></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td></td>
+          <td>
+            <input id='close'  name='close'  type='button' class='button' tabindex='141' value='Stäng'  onclick="$('#details_popup, #overlay').popHide();" />
+            &nbsp;
+            <input id='edit'   name='edit'   type='button' class='button' tabindex='140' value='Ändra'  onclick="edit_f();" />
+            &nbsp;
+            <input id='book'   name='book'   type='button' class='button' tabindex='141' value='Boka'   onclick="" />
+            &nbsp;
+            <input id='delete' name='delete' type='button' class='button' tabindex='141' value='Radera' onclick="delete_confirm_f();" />
+          </td>
+        </tr>
+      </table>
+    </div>
+-->

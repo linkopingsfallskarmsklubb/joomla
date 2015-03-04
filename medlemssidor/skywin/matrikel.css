@@ -1,0 +1,46 @@
+
+#filter {
+  float:      left;
+  margin-top: 15px;
+}
+
+#filter_field {
+  padding: 10px !important;
+}
+
+#member_list {
+  float:    left;
+  clear:    both; 
+  padding:  0 20px 0 0;
+  overflow: auto;
+}
+
+
+
+.selected {
+  background-color: #eeeeee;
+}
+
+.expanded {
+  background-color: #f9f9f9;
+}
+
+.c1 {
+  clear:       both;
+  float:       left;
+  width:       80px;
+}
+
+.c2 {
+  float:        left;
+  margin-right: 4px   !important;
+}
+
+.c2 input {
+  width: 140px !important;
+}
+
+
+.c2 select {
+  width: 100px !important;
+}

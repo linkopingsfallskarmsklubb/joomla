@@ -1,0 +1,369 @@
+
+$experimental-support-for-mozilla:      true !default;
+$experimental-support-for-webkit:       true !default;
+$experimental-support-for-opera:        true !default;
+$experimental-support-for-microsoft:    true !default;
+$experimental-support-for-khtml:        true !default;
+$support-for-original-webkit-gradients: true !default;
+
+@import "compass/css3";
+@import "compass/css3/user-interface";
+
+
+  /*******************************************************/
+  /* Apperance                                           */
+  /* Change the overal appearance here                   */
+  /*******************************************************/
+
+  /* Container */
+  $cc_padding         : 20px;
+  $cc_padding_top     : 10px;
+  $cc_padding_left    : 5px;
+  $cc_border          : 1px solid #aaaaaa;
+  $cc_backgroundColor : #f7f7f7;
+
+  /* Navigation area */
+  $nav_fontSize        : 15px;
+  $nav_fontWeight      : bold;
+  $nav_height          : 40px;
+
+  /* Date inner cell - defines the size of the date boxes */
+  $icl_width          : 20px;
+  $icl_height         : 24px;
+  $icl_margin         : 2px;
+  $icl_border_width   : 1px;
+  $icl_border_style   : solid;
+  $icl_border_color   : transparent;
+  $icl_fontSize       : 12px;
+  $icl_fontWeight     : normal;
+  
+  /* Date wrapper cell */
+  $wcl_border_width   : 1px;
+  $wcl_border_style   : solid;
+  $wcl_border_color   : transparent;
+
+  /* Date cell */
+  $cl_border_width    : 1px;
+  $cl_border_style    : solid;
+  $cl_border_color    : #aaaaaa;
+  $cl_backgroundColor : #ffffff; 
+  
+  /* Weekdays */
+  $wd_fontSize        : 12px;
+  $wd_fontWeight      : bold;
+  $wd_border_width    : 1px;
+  $wd_border_style    : solid;
+  $wd_border_color    : $cc_backgroundColor; 
+  $wd_backgroundColor : none; 
+  
+  /* Weeknumber */
+  $wk_width           : 30px;
+  $wk_fontSize        : 12px;
+  $wk_fontWeight      : bold;
+  $wk_border_width    : 1px;
+  $wk_border_style    : solid;
+  $wk_border_color    : $cc_backgroundColor;
+  $wk_backgroundColor : none; 
+
+  /* Dates from previous or next month */
+  $oth_backgroundColor : #dddddd; 
+  $oth_color           : #333333; 
+
+
+
+  /* $scale : 2; */
+
+  /* $icl_width    : $icl_width    * $scale; */
+  /* $icl_height   : $icl_height   * $scale; */
+  /* $icl_margin   : $icl_margin   * $scale; */
+  /* $icl_fontSize : $icl_fontSize * $scale; */
+  /* $wk_width     : $wk_width     * $scale; */
+  /* $wk_fontSize  : $wk_fontSize  * $scale; */
+  /* $wd_fontSize  : $wd_fontSize  * $scale; */
+
+
+  
+
+  /*******************************************************/
+  /* Highlights                                          */
+  /* Name must be on the form "X_[inner|outer]_X"          */
+  /*******************************************************/
+
+  .hl_outer_orange {
+    background-color: #FF4500 !important;
+  }
+
+  .hl_outer_green {
+    background-color: #AEE542 !important;
+  }
+
+  .hl_outer_blue {
+    background-color: #ADD8E6 !important;
+  }
+
+
+  .hl_inner_orange {
+    background-color: #FF4500           !important;
+    border:           1px solid #777777 !important;
+  }
+
+  .hl_inner_green {
+    background-color: #6B8E23           !important;
+    border:           1px solid #777777 !important;
+  }
+
+  .hl_inner_blue {
+    background-color: #ADD8E6           !important;
+    border:           1px solid #777777 !important;
+  }
+
+
+  .hl_inner_bold {
+    font-weight: bolder !important;
+  }
+
+
+
+  /*******************************************************/
+  /* Calculations                                        */
+  /* Do not touch                                        */
+  /*******************************************************/
+
+  $wk_height  : $icl_height + $icl_margin*2 + $wcl_border_width*2;
+  $wd_width   : $icl_width  + $icl_margin*2 + $wcl_border_width*2;
+  $wd_marginL : $wk_width   + $wk_border_width    + $cl_border_width;
+
+
+
+  /*******************************************************/
+  /* Container                                           */
+  /* This is the full container div.                     */
+  /*******************************************************/
+
+  .cal_cont {
+    float:                 left;
+    height:                auto;
+    width:                 auto;
+    min-width:             220px;
+    padding:               $cc_padding;
+    padding-top:           $cc_padding_top;
+    padding-left:          $cc_padding_left;
+    border:                $cc_border;
+    background-color:      $cc_backgroundColor;
+    @include user-select(none);
+  }
+
+
+  /*******************************************************/
+  /* Navigation                                          */
+  /* Pevious month, next month and current month         */
+  /*******************************************************/
+
+  .calendar_nav {
+    position:         relative;
+    width:            auto;
+    height:           $nav_height;
+    text-align:       center;
+    background-color: none;
+  }
+
+  .calendar_nav_date {
+    position:         relative;
+    width:            100%;
+    height:           $nav_height;
+    font-size:        $nav_fontSize;
+    font-weight:      $nav_fontWeight;
+    display:          table;
+    text-align:       center;
+    background-color: none;
+  }
+
+  .calendar_nav_left {
+    position:         absolute;
+    top:              0px;
+    left:             12px;
+    width:            30px;
+    height:           $nav_height;
+    display:          table;
+    text-align:       left;
+    background-color: none;
+    z-index:          2;
+  }
+
+  .calendar_nav_right {
+    position:         absolute;
+    top:              0px;
+    right:            0px;
+    width:            30px;
+    height:           $nav_height;
+    display:          table;
+    text-align:       right;
+    background-color: none;
+    z-index:          2;
+  }
+
+  .calendar_nav_img_cent {
+    display:        table-cell;
+    vertical-align: middle;
+    width:          20px;
+    height:         20px; 
+    cursor:         pointer;
+  }
+  .calendar_nav_date_cent {
+    display:        table-cell;
+    vertical-align: middle;
+  }
+
+
+  /*******************************************************/
+  /* Calendar object containers                          */
+  /* Week, weekday and all dates                         */
+  /*******************************************************/
+
+  .calendar_wd {
+    clear:       both;
+    width:       auto;
+    margin-top:  10px;
+    margin-left: $wd_marginL;
+  }
+
+  .calendar_wk {
+    clear:            both;
+    float:            left;
+    margin-top:       $cl_border_width/2 + 'px';
+    background-color: none;
+  }
+
+  .calendar_cl {
+    float: left;
+  }
+
+
+  /*******************************************************/
+  /*                                                     */
+  /*                                                     */
+  /*******************************************************/
+
+  /* Container around the date cells (adds top/left border) */
+  .cont_cell {
+    overflow:          hidden;
+	  width:             auto;
+    border-top-width:  $cl_border_width;
+    border-top-style:  $cl_border_style;
+    border-top-color:  $cl_border_color;
+    border-left-width: $cl_border_width;
+    border-left-style: $cl_border_style;
+    border-left-color: $cl_border_color;
+  }
+
+  .wd {
+    float:               left;
+    height:              15px;
+    width:               $wd_width;
+    margin:              0px;
+    padding:             0px;
+    font-size:           $wd_fontSize;
+    font-weight:         $wd_fontWeight;
+    text-align:          center;
+    cursor:              default;
+    border-right-width:  $wd_border_width;
+    border-right-style:  $wd_border_style;
+    border-right-color:  $wd_border_color;
+    border-bottom-width: $wd_border_width;
+    border-bottom-style: $wd_border_style;
+    border-bottom-color: $wd_border_color;
+    background-color:    $wd_backgroundColor;
+  }
+
+  .wk {
+    clear:               both;
+    width:               $wk_width;
+    height:              $wk_height;
+    margin:              0px;
+    padding:             0px;
+    line-height:         $wk_height;
+    text-align:          center;
+    font-size:           $wk_fontSize;
+    font-weight:         $wk_fontWeight;
+    cursor:              default;
+    border-right-width:  $wk_border_width;
+    border-right-style:  $wk_border_style;
+    border-right-color:  $wk_border_color;
+    border-bottom-width: $wk_border_width;
+    border-bottom-style: $wk_border_style;
+    border-bottom-color: $wk_border_color;
+    background-color:    $wk_backgroundColor;
+  }
+
+  .cell {
+    float:               left;
+    width:               auto; 
+    height:              auto; 
+    margin:              0px;
+    padding:             0px;
+    background-color:    $cl_backgroundColor;
+    border-right-width:  $cl_border_width;
+    border-right-style:  $cl_border_style;
+    border-right-color:  $cl_border_color;
+    border-bottom-width: $cl_border_width;
+    border-bottom-style: $cl_border_style;
+    border-bottom-color: $cl_border_color;
+    cursor:              default;
+    @include box-sizing(border-box);
+  }
+
+  .std {
+    cursor:             pointer;
+  }
+
+  .cell_wrapper {
+    height:             auto;
+    width:              100%;
+    border-width:       $wcl_border_width;
+    border-style:       $wcl_border_style;
+    border-color:       $wcl_border_color;
+    @include box-sizing(border-box);
+  }
+
+  .innercell {  
+    width:               $icl_width;
+    height:              $icl_height;
+    line-height:         $icl_height;
+    text-align:          center;
+    margin:              $icl_margin;
+    padding:             0px;
+    border-width:        $icl_border_width;
+    border-style:        $icl_border_style;
+    border-color:        $icl_border_color;
+    font-size:           $icl_fontSize;
+    @include user-select(none);
+    @include box-sizing(border-box);
+  }
+
+  .std .innercell:hover {  
+    border: 1px solid #ff0000;
+  }
+
+
+
+  /* Dates from previous/next months */
+  .other {  
+    color:            $oth_color;
+    background-color: $oth_backgroundColor;
+  }
+
+  /* Mondays start on new row */
+  .md {
+    clear: both;
+  }
+
+
+  /* Selected date */
+  .sel_date .cell_wrapper {
+    border-color: #000;
+  }
+
+  /* Current date */
+  .cur_date {
+    text-decoration: underline !important;
+  }

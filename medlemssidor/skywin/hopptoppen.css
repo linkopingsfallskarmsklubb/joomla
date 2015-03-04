@@ -1,0 +1,33 @@
+
+#filter {
+  float:   left;
+}
+
+#filter fieldset {
+  padding: 10px !important;
+}
+
+
+#hopptoppen {
+  float:    left;
+  clear:    both;
+  margin:   0 20px 0 0;
+  overflow: auto;
+}
+
+
+
+.c1 {
+  float:       left;
+  width:       50px;
+  font-weight: normal;
+}
+
+.c2 {
+  float:        left;
+  margin-right: 4px   !important;
+}
+
+.c2 select {
+  width:        100px !important;
+}
