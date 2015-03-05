@@ -28,8 +28,13 @@ for($hour = 0; $hour < 24; $hour++) {
   <span style="display: inline-block; width: 3em">Till: </span><select id="month-to">
 <?php foreach ($months as $idx => $month) { echo '<option ' . ($idx == 11 ? 'selected="1"' : '') . ' value="' . $idx . '">' . $month . '</option>'; } ?>
   </select><br />
-  <input type="button" value="Helg" onclick="select_dow([0,6])" />
-  <input type="button" value="Vardag" onclick="select_dow([1,2,3,4,5])" />
+  <input type="button" value="M" onclick="select_dow([1])" />
+  <input type="button" value="T" onclick="select_dow([2])" />
+  <input type="button" value="O" onclick="select_dow([3])" />
+  <input type="button" value="T" onclick="select_dow([4])" />
+  <input type="button" value="F" onclick="select_dow([5])" />
+  <input type="button" value="L" onclick="select_dow([6])" />
+  <input type="button" value="S" onclick="select_dow([0])" />
 <hr />
 <h2>Steg 2. Välj hopptider</h2>
   <span style="display: inline-block; width: 3em">Från: </span><select id="hour-from">

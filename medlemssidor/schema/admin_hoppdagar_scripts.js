@@ -214,6 +214,7 @@ var hour_group_idx = 0;
     if (Object.keys(highlighted_dates).length == 0) {
       return;
     }
+    // TODO(bluecmd): Check if we're overflowing the colors
 
     var dates = highlighted_dates;
     var key = from.value + ':' + to.value;
