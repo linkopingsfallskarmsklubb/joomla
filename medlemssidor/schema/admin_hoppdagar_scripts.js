@@ -180,7 +180,8 @@ var hour_group_idx = 0;
     var from = document.getElementById('month-from');
     var to = document.getElementById('month-to');
 
-    for (var month = from.value; month <= to.value; month++) {
+    for (var month = parseInt(from.value);
+        month <= parseInt(to.value); month++) {
       for (var day = 1; day < 32; day++) {
         var d = new Date(year, month, day);
         if (d.getMonth() != month)
