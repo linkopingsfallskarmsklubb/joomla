@@ -212,9 +212,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.std {
-  cursor: pointer; }
-
 .cell_wrapper {
   height: auto;
   width: 100%;
@@ -236,6 +233,7 @@
   border-style: solid;
   border-color: transparent;
   font-size: 12px;
+  cursor: pointer;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -244,7 +242,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.std .innercell:hover {
+.innercell:hover {
   border: 1px solid #ff0000; }
 
 /* Dates from previous/next months */

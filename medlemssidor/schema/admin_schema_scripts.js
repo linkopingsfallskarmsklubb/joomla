@@ -6,7 +6,7 @@
 
 
 //************************************************************************************
-// AJAX (Get) 
+// AJAX (Get)
 //************************************************************************************
 
   // Add ajax animation block
@@ -29,11 +29,6 @@
 
         // Stop loading animation
         $('#spinner').trigger('ajaxStop');
-
-        // Continue
-        if (action == 'get_event_days')    { highlight_f(ajaxRequest.responseText);    }  // Draw the calendar with days with events highlighted
-        if (action == 'get_autocomplete')  { autocomplete_f(ajaxRequest.responseText); }  // Get names for the autocomplete function
-        if (action == 'get_day_info')      { fill_info_f(ajaxRequest.responseText);    }  // List info for the current day.
 
         // Caller specific stuff
         if (cb != undefined) {
@@ -120,43 +115,51 @@
   //-------------------------------------------------------------------------
 
   $(document).ready(function(){
-    cal_draw_f();                    // Draw calendar
     // Get names for the autocomplete function
-    ajax_f('get_autocomplete', '', function() {
-      ajax_f('get_event_days', '');
+    ajax_f('get_autocomplete', '', function(response) {
+      autocomplete_f(response);
+
+      ajax_f('get_event_days', '', function(response) {
+        highlight_f(undefined, response);
+      });
     });
   });
-
-
-  //-------------------------------------------------------------------------
-  // When navigation arrow is clicked or when calendar is 
-  // drawn for the first time, this function is called
-  //-------------------------------------------------------------------------
-
-  function cal_user_nav_f(date) {
-    ajax_f('get_event_days', '&date='+date);
-  }
 
 
   //-------------------------------------------------------------------------
   // Highlight dates
   //-------------------------------------------------------------------------
 
-  function highlight_f(event_dates) {
-
-    // Reset highlights
-    cal_highlight_reset_f();
-
+  function highlight_f(date, event_dates) {
     // Highlight scheduled dates
-    cal_highlight_f(event_dates, 'hl_outer_green');
+    var calender = document.getElementsByClassName('cal_cont')[0];
+    cal_draw_f(calender, true, date, select_handler_f, function(d) {
+      var fd = d.getFullYear() + '-';
+      if (d.getMonth() < 10) { fd += "0"; }
+      fd += (d.getMonth()+1) + '-';
+      if (d.getDate() < 10) { fd += "0"; }
+      fd += d.getDate();
+      if (event_dates.indexOf(fd) != -1) {
+        return 'hl_outer_green';
+      }
+    }, function(date) {
+      ajax_f('get_event_days', '&date='+date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate(), function(response) {
+        highlight_f(date, response);
+      });
+    });
   }
 
 
   //-------------------------------------------------------------------------
   // When a date is selected, do this
   //-------------------------------------------------------------------------
-
-  function select_handler_f(date) { 
+  function select_handler_f(d) {
+    console.log(d);
+    var date = d.getFullYear() + '-';
+    if (d.getMonth() < 10) { date += "0"; }
+    date += (d.getMonth()+1) + '-';
+    if (d.getDate() < 10) { date += "0"; }
+    date += d.getDate();
 
     // Show form div
     $('#step_1').hide();
@@ -166,9 +169,6 @@
     // Reset the form
     $('#new_day_form').each( function() {this.reset()} );
 
-    // Date also contains some other stuff, remove it
-    date = date.split('_')[1];
-    
     // Date to form
     $('#datum').val(date);
 
@@ -178,7 +178,8 @@
     });
 
     // Get info for selected day
-    ajax_f('get_day_info', '&date='+date, function() {
+    ajax_f('get_day_info', '&date='+date, function(response) {
+      fill_info_f(response);
       // Focus first input field
       $('#tid_start').focus();
 
@@ -213,7 +214,7 @@
 
     // Insert the new <li>
     newLiClone.insertAfter('#' + id);
-    
+
     // Clear input fields
     newLiInp.val('');
 
@@ -293,12 +294,12 @@
     else {
 
       // Diffrerent data sets are separated by '|'.
-      var schema     = info.split('|'); 
+      var schema     = info.split('|');
       var hopp_tider = schema[0];
       var personal   = schema[1];
 
       // General start/stop times
-      var myhash     = eval( "mkhash(" + hopp_tider + ")" ); 
+      var myhash     = eval( "mkhash(" + hopp_tider + ")" );
       var tid_start  = myhash['tid_start'];
       var tid_stop   = myhash['tid_stop'];
 
@@ -317,7 +318,7 @@
         Arr[4] = new Array(); // AFF
 
         for (row in hopp_schema) {
-          var myhash = eval( "mkhash(" + hopp_schema[row] + ")" ); 
+          var myhash = eval( "mkhash(" + hopp_schema[row] + ")" );
           switch (myhash['type']) {
             case 'hl':          Arr[0].push(new Array("hl",  myhash['fornamn'] + " " + myhash['efternamn'],myhash['id'],myhash['tid_start'],myhash['tid_stop'])); break;
             case 'manifest':    Arr[1].push(new Array("man", myhash['fornamn'] + " " + myhash['efternamn'],myhash['id'],myhash['tid_start'],myhash['tid_stop'])); break;
@@ -377,7 +378,7 @@
   function autocomplete_f(names) {
 
     // Separate different types
-    myhash = eval( "mkhash(" + names + ")" ); 
+    myhash = eval( "mkhash(" + names + ")" );
 
     // Split each type into array
     hl_names  = myhash['hl'].split(",");
@@ -478,7 +479,7 @@
     var nrof_hm  = 0;
     var nrof_aff = 0;
     var nrof_man = 0;
-    
+
     obj_pil.each(function() { if ($(this).val() != "") { nrof_pil++; }; });
     obj_hl.each(function()  { if ($(this).val() != "") { nrof_hl++;  }; });
     obj_hm.each(function()  { if ($(this).val() != "") { nrof_hm++;  }; });
