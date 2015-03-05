@@ -1,0 +1,17 @@
+
+.cal_cont {
+  border: none;
+  min-width: 14em;
+  min-height: 14em;
+}
+
+#control {
+  float: left;
+  height: 30em;
+  width: 20em;
+  background-color: #f7f7f7;
+}
+
+#calendars {
+  overflow: auto;
+}

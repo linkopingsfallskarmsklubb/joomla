@@ -20,7 +20,8 @@ function cal_draw_f(node, buttons, date, select_cb, highlight_cb, navigate_cb) {
   var p_month = new Date(year, month-1,1).getMonth();
 
   // Insert the calendar into html placeholder
-  var html = "";
+  var html = "<div class='calendar_title'>" +
+    node.getAttribute('data-title') + "</div>";
 
   if (buttons) {
     html +=  "<div class='calendar_nav'> \
@@ -192,9 +193,9 @@ function cal_draw_f(node, buttons, date, select_cb, highlight_cb, navigate_cb) {
     }
     div.onclick = function(d, div) {
       return function() {
-        select_cb(d);
         $('.sel_date').removeClass('sel_date');
         div.className += ' sel_date';
+        select_cb(d);
       }
     } (d, div);
     html_cl.appendChild(div);
