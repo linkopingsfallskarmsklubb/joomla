@@ -7,7 +7,7 @@
 
 #control {
   float: left;
-  height: 30em;
+  min-height: 30em;
   width: 20em;
   background-color: #f7f7f7;
 }
@@ -15,3 +15,9 @@
 #calendars {
   overflow: auto;
 }
+
+.hl_outer_0 { background-color: hsl(10, 100%, 75%); }
+.hl_outer_1 { background-color: hsl(30, 100%, 75%); }
+.hl_outer_2 { background-color: hsl(50, 100%, 75%); }
+.hl_outer_3 { background-color: hsl(70, 100%, 75%); }
+.hl_outer_4 { background-color: hsl(90, 100%, 75%); }

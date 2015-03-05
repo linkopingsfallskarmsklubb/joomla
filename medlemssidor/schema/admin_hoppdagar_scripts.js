@@ -5,6 +5,8 @@
 
 
 var highlighted_dates = {};
+var hour_groups = {};
+var hour_group_idx = 0;
 
 //************************************************************************************
 // AJAX (Get)
@@ -139,6 +141,11 @@ var highlighted_dates = {};
           if (highlighted_dates[iso] == true) {
             return 'hl_outer_green';
           }
+          for (var group in hour_groups) {
+            if (iso in hour_groups[group]['dates']) {
+              return 'hl_outer_' + hour_groups[group]['color'];
+            }
+          }
         }, function(date) {
           ajax_f('get_event_days', '&date=' + date2iso(date), function(response) {
             highlight_f(date, response);
@@ -173,9 +180,11 @@ var highlighted_dates = {};
     var from = document.getElementById('month-from');
     var to = document.getElementById('month-to');
 
-    for (var month = from.value; month < to.value; month++) {
+    for (var month = from.value; month <= to.value; month++) {
       for (var day = 1; day < 32; day++) {
         var d = new Date(year, month, day);
+        if (d.getMonth() != month)
+          continue;
         if (dow.indexOf(d.getDay()) > -1) {
           var iso = date2iso(d);
 
@@ -186,9 +195,41 @@ var highlighted_dates = {};
             decided = true;
           }
 
-          highlighted_dates[iso] = select;
+          if (select) {
+            highlighted_dates[iso] = select;
+          } else {
+            delete highlighted_dates[iso];
+          }
         }
       }
     }
+    highlight_f();
+  }
+
+  function apply_hours() {
+    var from = document.getElementById('hour-from');
+    var to = document.getElementById('hour-to');
+
+    if (Object.keys(highlighted_dates).length == 0) {
+      return;
+    }
+
+    var dates = highlighted_dates;
+    var key = from.value + ':' + to.value;
+    var color = -1;
+    if (key in hour_groups) {
+      $.extend(dates, hour_groups[key]['dates']);
+      color = hour_groups[key]['color'];
+    } else {
+      color = hour_group_idx++;
+      var legend = document.getElementById('color-legend');
+      var newNode = document.createElement('li');
+      newNode.innerHTML = '<span class="hl_outer_' + color + '">' +
+        from.options[from.selectedIndex].text + ' -> ' +
+        to.options[to.selectedIndex].text + '</span>';
+      legend.appendChild(newNode);
+    }
+    hour_groups[key] = {'color': color, 'dates': dates};
+    highlighted_dates = {};
     highlight_f();
   }
