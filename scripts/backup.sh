@@ -10,6 +10,6 @@ tar -Jcf $OUT /opt/bitnami/apps/joomla/htdocs/ /tmp/mysqldump.sql 2> /dev/null
 
 rm -f /tmp/mysqldump.sql
 
-/usr/local/bin/gsutil cp $OUT gs://lfk/backup-$(hostname)/ 2> /dev/null
+/usr/local/bin/gsutil cp $OUT gs://lfk-backup/backup-$(hostname)/ 2> /dev/null
 
 rm -f $OUT
