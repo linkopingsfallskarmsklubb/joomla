@@ -71,12 +71,12 @@ $doc = JFactory::getDocument();
 </form>
 </div>
 <br />
-<table class="manifest-data manifest-giftcards">
+<table class="manifest-giftcards">
   <tr>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
-    <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_NUM'); ?></th>
-    <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_EXPIRES'); ?></th>
+    <th style="width: 3em"><?php echo JText::_('COM_MANIFEST_GIFTCARD_NUM'); ?></th>
+    <th style="width: 6em"><?php echo JText::_('COM_MANIFEST_GIFTCARD_EXPIRES'); ?></th>
     <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_PERSON'); ?></th>
     <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_CONTACT'); ?></th>
     <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_EMAIL'); ?></th>
