@@ -84,11 +84,11 @@ class ManifestViewGiftcard extends JViewLegacy {
         $columns[] = 'product_jump';
         $values[] = 1;
       }
-      if (in_array('jump', $products)) {
+      if (in_array('photo', $products)) {
         $columns[] = 'product_photo';
         $values[] = 1;
       }
-      if (in_array('jump', $products)) {
+      if (in_array('video', $products)) {
         $columns[] = 'product_video';
         $values[] = 1;
       }
