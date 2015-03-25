@@ -79,6 +79,11 @@ Tid 1: <span class="split-time-day"></span> <span class="split-time-start"></spa
 <input id="split-time-range" type="range" style="width: 100%" step="10" />
 Tid 2: <span class="split-time-day"></span> <span class="split-time"></span> - <span class="split-time-end"></span>
 </div>
+<div id="staff-dialog">
+<p>TODO</p>
+<p>Här kommer det finnas listor med lämpligast personer och massa info om hur ofta de är schemalagda redan osv.</p>
+<input type="button" value="Frustrationsknapp" />
+</div>
 <script src="admin_staff.js"></script>
 </body>
 </html>

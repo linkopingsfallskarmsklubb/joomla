@@ -2,6 +2,8 @@ var split_dialog_updater = null;
 var split_dialog = null;
 var split_dialog_row = null;
 
+var staff_dialog = null;
+
 function time2human(time) {
   var hour = Math.floor(time / 60);
   var min = time % 60;
@@ -86,6 +88,8 @@ function add_role(this_) {
     var node = $('<td class="' + clsname + ' secondary empty" data-class="' + cls + '">');
     $(this).find('td[data-class="' + cls + '"]').last().after(node);
   });
+  // Refresh all .staff click handlers
+  $('td.staff').click(staff_click);
 }
 
 function show_only(classes) {
@@ -126,9 +130,15 @@ function split(old_row) {
   row.removeClass('first').addClass('later');
 
   row.find('.split').click(split_button_click);
+  row.find('.staff').click(staff_click);
 
   old_row.after(row);
   split_dialog.dialog('close');
+}
+
+function staff_click() {
+  console.log(this);
+  staff_dialog.dialog('open');
 }
 
 $(document).ready(function() {
@@ -147,6 +157,19 @@ $(document).ready(function() {
       split_dialog_updater = null;
       split_dialog_row = null;
     }});
+  staff_dialog = $('#staff-dialog').dialog({
+    autoOpen: false,
+    height: '500',
+    width: '90%',
+    modal: true,
+    buttons: {
+      "OK": function() { alert('TODO'); },
+      "Avbryt": function() {
+        staff_dialog.dialog('close');
+      }},
+    close: function() {
+    }});
+ 
   $('th.multiple').each(function() {
     var btn = $('<button class="pure-button add">+</button>');
     var this_ = this;
@@ -162,7 +185,8 @@ $(document).ready(function() {
     }).get());
   });
   $('.split').click(split_button_click);
-  $('#split-dialog').keypress(function(e) {
+  $('td.staff').click(staff_click);
+  $('#split-dialog,#staff-dialog').keypress(function(e) {
     if (e.keyCode == $.ui.keyCode.ENTER) {
       $(this).parent().find('.ui-dialog-buttonpane button:first').click();
       return false;
