@@ -1,0 +1,37 @@
+body {
+  padding: 1em;
+}
+.day {
+  font-weight: bold;
+  width: 6em;
+  min-width: 6em;
+  text-align: center;
+}
+.time-start, .time-end {
+  width: 4em;
+  min-width: 4em;
+  text-align: center;
+}
+.staff {
+  width: 10em;
+  min-width: 10em;
+}
+.add, .remove, .split {
+  margin-left: 1em;
+  margin: 0 0 0 0.5em;
+  padding: 0.3em 0.5em 0.3em 0.5em;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+tr td {
+  padding: 0.4em 0.2em 0.4em 0.2em;
+}
+tr:nth-child(even) {
+  background: #EEE;
+}
+tr:nth-child(odd) {
+  background: #FFF;
+}
+tr:hover td {
+  background: #FCC;
+}
