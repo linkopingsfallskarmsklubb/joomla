@@ -25,6 +25,8 @@ function time2human($time) {
 <html>
 <head>
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
   <link rel="stylesheet" type="text/css" href="pure-min.css" />
   <link rel="stylesheet" type="text/css" href="admin_staff.css" />
 </head>
@@ -53,22 +55,30 @@ function time2human($time) {
 </tr>
 
 <?php foreach($slots as $slot => $times): ?>
-<tr>
-<td class="day"><?php echo $slot; ?></td>
-<td class="time-start"><?php echo time2human($times[0]); ?></td>
+<tr class="first">
+<td class="day" data-day="<?php echo $slot; ?>"><?php echo $slot; ?></td>
+<td class="time-start" data-time="<?php echo $times[0];?>"><?php echo time2human($times[0]); ?></td>
 <td class="time-split"><button class="pure-button split">&#x2702;</button></td>
-<td class="time-end"><?php echo time2human($times[1]); ?></td>
-<td class="staff" data-class="hl">HL</td>
-<td class="staff" data-class="hm">HM</td>
-<td class="staff" data-class="manifest">Manifestor</td>
-<td class="staff multiple" data-class="pilot">Pilot</td>
-<td class="staff multiple" data-class="tandem">Tandem</td>
-<td class="staff multiple" data-class="foto">Foto</td>
+<td class="time-end" data-time="<?php echo $times[1];?>"><?php echo time2human($times[1]); ?></td>
+<td class="staff" data-class="hl">Adam HLsson</td>
+<td class="staff" data-class="hm">Håkan HMqvist</td>
+<td class="staff" data-class="manifest">Mani Festor</td>
+<td class="staff multiple" data-class="pilot">Flygande Jakob</td>
+<td class="staff multiple" data-class="tandem">Fågäl Mannen</td>
+<td class="staff multiple" data-class="foto">Linnsl Usen</td>
 
 </tr>
 
 <?php endforeach ?>
-  </table>
+</table>
+
+<div id="split-dialog">
+<h2>Dela upp hopptider</h2>
+<form>
+Tid 1: <span class="split-time-day"></span> <span class="split-time-start"></span> - <span class="split-time"></span>
+<input id="split-time-range" type="range" style="width: 100%" step="10" />
+Tid 2: <span class="split-time-day"></span> <span class="split-time"></span> - <span class="split-time-end"></span>
+</div>
 <script src="admin_staff.js"></script>
 </body>
 </html>

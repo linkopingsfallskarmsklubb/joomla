@@ -16,6 +16,26 @@ body {
   width: 10em;
   min-width: 10em;
 }
+td.staff:hover {
+  background-color: #ff8;
+  cursor: pointer;
+  text-decoration: underline;
+}
+td.staff.empty::before {
+  font-style: italic;
+  color: #ddd;
+}
+.later td.staff.empty::before {
+  content: "Samma som förra";
+}
+.first td.staff.empty::before {
+  content: "Ingen vald";
+}
+td.staff.empty:hover::before {
+  content: "Klicka för att välja";
+  font-style: normal;
+  color: black;
+}
 th.staff[data-class] {
   text-align: left;
 }
@@ -42,7 +62,7 @@ tr:nth-child(odd) {
   background: #fff;
 }
 tr:hover td {
-  background: #aaa;
+  background: #ffc;
 }
 #show input {
   margin-left: 0.6em;
