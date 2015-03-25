@@ -5,7 +5,22 @@ function add_role(this_) {
   var node = $('<th class="' + clsname + ' secondary" data-class="' + cls + '">');
   node.html(this_.innerHTML);
   node.find('.add').click(function(){ add_role(node[0]); });
-  tr.find('*[data-class="' + cls + '"]').last().after(node);
+
+  var btn = node.find('.remove');
+  btn.show();
+  btn.click(function () {
+    console.log(this_);
+  });
+
+  tr.find('th[data-class="' + cls + '"]').last().after(node);
+
+  // Now shift all data as well
+  var table = tr.closest('table');
+  table.find('tr').each(function() {
+    console.log(this);
+    var node = $('<td class="' + clsname + ' secondary" data-class="' + cls + '">');
+    $(this).find('td[data-class="' + cls + '"]').last().after(node);
+  });
 }
 
 function show_only(classes) {
@@ -16,20 +31,18 @@ function show_only(classes) {
 }
 
 $(document).ready(function() {
-  show_only(['hl', 'pilot']);
-
-  $('.multiple').each(function() {
+  $('th.multiple').each(function() {
     var btn = $('<button class="pure-button add">+</button>');
     var this_ = this;
     btn.click(function(){ add_role(this_); });
     $(this).append(btn);
-  });
-  $('.multiple.secondary').each(function() {
     var btn = $('<button class="pure-button remove">-</button>');
-    var this_ = this;
-    btn.click(function () {
-      console.log(this_);
-    });
+    btn.hide();
     $(this).append(btn);
+  });
+  $('#show input[type="checkbox"]').click(function() {
+    show_only($('#show input[type="checkbox"]:checked').map(function() {
+      return this.value;
+    }).get());
   });
 });

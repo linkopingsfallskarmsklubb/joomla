@@ -30,6 +30,14 @@ function time2human($time) {
 </head>
 <body>
 
+<p id="show">Visa roller:
+<input type="checkbox" name="show[]" checked="1" value="hl" id="show-hl" /><label for="show-hl">HL</label>
+<input type="checkbox" name="show[]" checked="1" value="hm" id="show-hm" /><label for="show-hm">HM</label>
+<input type="checkbox" name="show[]" checked="1" value="manifest" id="show-manifest" /><label for="show-manifest">Manifestor</label>
+<input type="checkbox" name="show[]" checked="1" value="pilot" id="show-pilot" /><label for="show-pilot">Pilot</label>
+<input type="checkbox" name="show[]" checked="1" value="tandem" id="show-tandem" /><label for="show-tandem">Tandem</label>
+<input type="checkbox" name="show[]" checked="1" value="foto" id="show-foto" /><label for="show-foto">Foto</label>
+</p>
 <table>
 <tr>
 <th class="day">Dag</th>
@@ -50,6 +58,13 @@ function time2human($time) {
 <td class="time-start"><?php echo time2human($times[0]); ?></td>
 <td class="time-split"><button class="pure-button split">&#x2702;</button></td>
 <td class="time-end"><?php echo time2human($times[1]); ?></td>
+<td class="staff" data-class="hl">HL</td>
+<td class="staff" data-class="hm">HM</td>
+<td class="staff" data-class="manifest">Manifestor</td>
+<td class="staff multiple" data-class="pilot">Pilot</td>
+<td class="staff multiple" data-class="tandem">Tandem</td>
+<td class="staff multiple" data-class="foto">Foto</td>
+
 </tr>
 
 <?php endforeach ?>
