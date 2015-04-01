@@ -39,7 +39,7 @@ td.staff.empty:hover::before {
 th.staff[data-class] {
   text-align: left;
 }
-tr th {
+#schedule tr th {
   line-height: 35px;
 }
 .add, .remove, .split {
@@ -52,16 +52,16 @@ tr th {
 .remove {
   background-color: #fcc;
 }
-tr td {
+#schedule tr td {
   padding: 0.4em 0.2em 0.4em 0.2em;
 }
-tr:nth-child(even) {
+#schedule tr:nth-child(even) {
   background: #eee;
 }
-tr:nth-child(odd) {
+#schedule tr:nth-child(odd) {
   background: #fff;
 }
-tr:hover td {
+#schedule tr:hover td {
   background: #ffc;
 }
 #show input {
@@ -69,4 +69,36 @@ tr:hover td {
 }
 #show label {
   margin-left: 0.2em;
+}
+#show-quick td {
+  text-align: center;
+  padding-left: 0.7em;
+}
+#show-quick td {
+  padding-bottom: 0.4em;
+}
+#show-quick td.spacer {
+  padding-left: 2em;
+}
+#top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.3em 1em 0.3em 1em;
+  border-bottom: 1px solid black;
+  width: 100%;
+  background-color: #fff;
+  z-index: 0;
+}
+#title {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 0.3em 1em 0.3em 1em;
+  background-color: #fff;
+  font-size: xx-large;
+}
+body {
+  margin-top: 3em;
 }

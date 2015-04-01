@@ -39,6 +39,38 @@ function split_button_click() {
   split_dialog_row = tr;
 }
 
+function remove_role(this_ ){
+  var tr = $(this_).closest('tr');
+  var table = tr.closest('table');
+  // Check that nobody is scheduled in the column
+  var idx = $(this_).index();
+  var ok = true;
+  table.find('tr').each(function() {
+    $(this).find('td,th').each(function () {
+      if ($(this).index() == idx) {
+        if ($(this).data('id') != undefined) {
+          ok = false;
+        }
+        return false;
+      }
+    });
+  });
+
+  if (!ok) {
+    alert('Det finns minst en schemalagd person i denna kolumnen.\nTa bort personen innan du tar bort kolumnen.');
+    return;
+  }
+  // OK to remove
+  table.find('tr').each(function() {
+    $(this).find('td,th').each(function () {
+      if ($(this).index() == idx) {
+        $(this).remove();
+        return false;
+      }
+    });
+  });
+}
+
 function add_role(this_) {
   var tr = $(this_).closest('tr');
   var table = tr.closest('table');
@@ -50,35 +82,7 @@ function add_role(this_) {
 
   var btn = node.find('.remove');
   btn.show();
-  btn.click(function () {
-    // Check that nobody is scheduled in the column
-    var idx = node.index();
-    var ok = true;
-    table.find('tr').each(function() {
-      $(this).find('td,th').each(function () {
-        if ($(this).index() == idx) {
-          if ($(this).data('id') != undefined) {
-            ok = false;
-          }
-          return false;
-        }
-      });
-    });
- 
-    if (!ok) {
-      alert('Det finns minst en schemalagd person i denna kolumnen.\nTa bort personen innan du tar bort kolumnen.');
-      return;
-    }
-    // OK to remove
-    table.find('tr').each(function() {
-      $(this).find('td,th').each(function () {
-        if ($(this).index() == idx) {
-          $(this).remove();
-          return false;
-        }
-      });
-    });
-  });
+  btn.click(function() { remove_role(node.get()); });
 
   tr.find('th[data-class="' + cls + '"]').last().after(node);
 
@@ -111,13 +115,15 @@ function split(old_row) {
     // Check that nobody is scheduled in the row
     var ok = true;
     row.find('td').each(function () {
-      if ($(this).data('id') != undefined) {
+      var id = $(this).data('id');
+      if (id != 0 && id != undefined) {
         ok = false;
       }
     });
  
     if (!ok) {
       alert('Det finns minst en schemalagd person på denna raden.\nTa bort personen innan du tar bort raden.');
+      return;
     }
     // OK to remove - patch the other rows with our times
     var end_time = row.find('.time-end').data('time');
@@ -126,7 +132,7 @@ function split(old_row) {
   });
 
   // Default to no staff selected
-  row.find('.staff').data('id', undefined).text('').addClass('empty');
+  row.find('.staff').data('id', 0).text('').addClass('empty');
   row.removeClass('first').addClass('later');
 
   row.find('.split').click(split_button_click);
@@ -176,7 +182,10 @@ $(document).ready(function() {
     btn.click(function(){ add_role(this_); });
     $(this).append(btn);
     var btn = $('<button class="pure-button remove">-</button>');
-    btn.hide();
+    if (!$(this).hasClass('secondary')) {
+      btn.hide();
+    }
+    btn.click(function() { remove_role(this_); });
     $(this).append(btn);
   });
   $('#show input[type="checkbox"]').click(function() {
