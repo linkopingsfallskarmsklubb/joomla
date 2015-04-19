@@ -168,6 +168,7 @@ var hour_group_idx = 0;
       $('.sel_date').addClass('hl_outer_green');
     } else {
       $('.sel_date').removeClass('hl_outer_green');
+      delete highlighted_dates[iso];
     }
   }
 
@@ -219,19 +220,53 @@ var hour_group_idx = 0;
     var dates = highlighted_dates;
     var key = from.value + ':' + to.value;
     var color = -1;
+    var node;
     if (key in hour_groups) {
       $.extend(dates, hour_groups[key]['dates']);
       color = hour_groups[key]['color'];
+      node = hour_groups[key]['node'];
     } else {
       color = hour_group_idx++;
       var legend = document.getElementById('color-legend');
-      var newNode = document.createElement('li');
-      newNode.innerHTML = '<span class="hl_outer_' + color + '">' +
+      node = document.createElement('li');
+      node.innerHTML = '<span class="hl_outer_' + color + '">' +
         from.options[from.selectedIndex].text + ' -> ' +
         to.options[to.selectedIndex].text + '</span>';
-      legend.appendChild(newNode);
+      legend.appendChild(node);
     }
-    hour_groups[key] = {'color': color, 'dates': dates};
+
+    // Remove overlap from old groups
+    remove_hours_internal();
+
+    hour_groups[key] = {
+      'color': color, 'dates': dates,
+      'node': node
+    };
     highlighted_dates = {};
     highlight_f();
   }
+
+  function remove_hours_internal() {
+    if (Object.keys(highlighted_dates).length == 0) {
+      return;
+    }
+    Object.keys(hour_groups).forEach(function (key) {
+      Object.keys(highlighted_dates).forEach(function (date) {
+        if (date in hour_groups[key]['dates']) {
+          delete hour_groups[key]['dates'][date];
+        }
+      });
+      if (Object.keys(hour_groups[key]['dates']).length == 0) {
+        $(hour_groups[key]['node']).remove();
+        delete hour_groups[key];
+      }
+    });
+  }
+
+  function remove_hours() {
+    remove_hours_internal();
+
+    highlighted_dates = {};
+    highlight_f();
+  }
+

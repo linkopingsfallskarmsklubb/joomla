@@ -44,6 +44,7 @@ for($hour = 0; $hour < 24; $hour++) {
 <?php foreach ($hours as $idx => $hour) { echo '<option ' . ($idx == 18*60 ? 'selected="1"' : '') . ' value="' . $idx . '">' . $hour . '</option>'; } ?>
   </select><br />
   <input type="button" value="Verkställ" onclick="apply_hours();" />
+  <input type="button" value="Ta bort" onclick="remove_hours();" />
 <hr />
 <h2>Steg 3. Granska och spara</h2>
   <ul id="color-legend">
