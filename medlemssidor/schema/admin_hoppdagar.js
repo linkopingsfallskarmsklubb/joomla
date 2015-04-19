@@ -12,32 +12,8 @@ var hour_group_idx = 0;
 // AJAX (Get)
 //************************************************************************************
 
-  // Add ajax animation block
-  $(document).ready(function() {
-    ajax_anim();
-  });
-
   function ajax_f(action, qstr, cb) {
-
-    // Ajax Request variable by browser
-    ajax_request_f();
-
-    // Create a function that will receive data sent from the server.
-    // When data is fetch another function is called depending on what we want to do.
-    ajaxRequest.onreadystatechange = function() {
-      if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
-
-        // Caller specific stuff
-        if (cb != undefined) {
-          cb(ajaxRequest.responseText);
-        }
-      }
-    }
-
-    // Now get the value from user and pass it to server script (the id can also be a date).
-    var queryString = "?action=" + action + qstr;
-    ajaxRequest.open("GET", "admin_hoppdagar_db.php" + queryString, true);
-    ajaxRequest.send(null);
+    cb('[]');
   }
 
 

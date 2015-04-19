@@ -1,12 +1,11 @@
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../../../themes/lfk/main.css" />
-  <link rel="stylesheet" type="text/css" href="../../includes/fonticons/css/font-awesome.css" />
+  <link rel="stylesheet" type="text/css" href="calendar.css" />
+  <link rel="stylesheet" type="text/css" href="admin_hoppdagar.css" />
+  <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="calendar.js"></script>
+  <script type="text/javascript" src="admin_hoppdagar.js"></script>
 <?php
-define("DIR_REL", '/marten');
-include("admin_hoppdagar_head.php");
-
 $months = array(
   'Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti',
   'September', 'Oktober', 'November', 'December');
