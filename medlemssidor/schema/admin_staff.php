@@ -57,9 +57,11 @@ function time2human($time) {
 ?>
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+  <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" />
   <link rel="stylesheet" type="text/css" href="pure-min.css" />
   <link rel="stylesheet" type="text/css" href="admin_staff.css" />
 </head>
@@ -173,9 +175,8 @@ Tid 1: <span class="split-time-day"></span> <span class="split-time-start"></spa
 Tid 2: <span class="split-time-day"></span> <span class="split-time"></span> - <span class="split-time-end"></span>
 </div>
 <div id="staff-dialog" style="display: none">
-<p>TODO</p>
-<p>Här kommer det finnas listor med lämpligast personer och massa info om hur ofta de är schemalagda redan osv.</p>
-<input type="button" value="Frustrationsknapp" />
+<br />
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="staff-table"></table>
 </div>
 <script src="admin_staff.js"></script>
 </body>

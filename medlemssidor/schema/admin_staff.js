@@ -3,6 +3,17 @@ var split_dialog = null;
 var split_dialog_row = null;
 
 var staff_dialog = null;
+var staff_table = null;
+var staff_selected = null;
+var staff = {};
+var classes = {
+  'hl': 'Hoppledare',
+  'hm': 'Hoppmästare',
+  'manifest': 'Manifestor',
+  'tandem': 'Tandempilot',
+  'pilot': 'Pilot',
+  'foto': 'Fotograf'
+};
 
 function time2human(time) {
   var hour = Math.floor(time / 60);
@@ -98,9 +109,12 @@ function add_role(this_) {
 
 function show_only(classes) {
   $('*[data-class]').hide();
+  $('#show input[type="checkbox"]:checked').prop('checked', false);
   classes.forEach(function(cls) {
     $('*[data-class="' + cls + '"]').show();
+    $('#show-' + cls).prop('checked', true);
   });
+
 }
 
 function split(old_row) {
@@ -142,10 +156,80 @@ function split(old_row) {
   split_dialog.dialog('close');
 }
 
-function staff_click() {
-  console.log(this);
-  staff_dialog.dialog('open');
+function staff_dialog_refresh(cls, person) {
+  if (staff_table) {
+    staff_table.fnDestroy();
+  }
+  staff_table = $('#staff-table').dataTable({
+    'data': staff[cls]['*'],
+    'columns': [
+      { 'data': 'FirstName' },
+      { 'data': 'LastName' },
+      { 'data': 'Club' },
+      { 'data': 'Year' },
+    ],
+    'order': [[3, 'desc'], [0, 'asc'], [1, 'asc']]
+  });
+
+  $('#staff-table tbody').on('click', 'tr', function () {
+    var person = staff_table.fnGetData(this);
+    staff_dialog_select(person);
+  });
 }
+
+function staff_dialog_select(person) {
+  if (person) {
+    $(staff_selected)
+      .text(person.FirstName + ' ' + person.LastName)
+      .data('id', person.InternalNo)
+      .removeClass('empty');
+  } else {
+    $(staff_selected)
+      .text('')
+      .data('id', 0)
+      .addClass('empty');
+  }
+  staff_dialog.dialog('close');
+}
+
+function staff_click() {
+  var cls = $(this).data('class');
+  var id = $(this).data('id');
+  var person = staff[cls][id];
+  if (person == undefined && id) {
+    alert('Varning! ' + $(this).text() + ' uppfyller inte längre kraven ' +
+        'för rollen ' + classes[cls] + ' och är därför inte omvalbar.');
+  }
+  staff_dialog.dialog('open');
+  staff_dialog_refresh(cls, person);
+  staff_selected = this;
+}
+
+function preload_error(error) {
+  if (error.status == 401) {
+    // Refresh user credentials
+    window.location = '/medlemssidor/profil.html?view=login';
+    return;
+  }
+}
+
+function preload_response(map, data) {
+  map['*'] = data;
+  data.forEach(function(elem) {
+    map[elem.InternalNo] = elem;
+  });
+}
+
+function preload_staff() {
+  Object.keys(classes).forEach(function(type) {
+    staff[type] = {};
+    $.getJSON('/templates/lfk/api/staff.php?type=' + type,
+      preload_response.bind(undefined, staff[type])).fail(preload_error);
+  });
+  console.log('Staff preloading complete');
+}
+
+preload_staff();
 
 $(document).ready(function() {
   split_dialog = $('#split-dialog').dialog({
@@ -165,14 +249,18 @@ $(document).ready(function() {
     }});
   staff_dialog = $('#staff-dialog').dialog({
     autoOpen: false,
-    height: '500',
-    width: '90%',
+    height: 650,
+    width: 800,
     modal: true,
     buttons: {
       "OK": function() { alert('TODO'); },
+      "Ingen": function() {
+        staff_dialog_select(null);
+      },
       "Avbryt": function() {
         staff_dialog.dialog('close');
-      }},
+      }
+    },
     close: function() {
     }});
  
@@ -200,5 +288,8 @@ $(document).ready(function() {
       $(this).parent().find('.ui-dialog-buttonpane button:first').click();
       return false;
     }
+  });
+  $('.show-quick-btn').click(function () {
+    show_only($(this).data('types').split(','));
   });
 });
