@@ -59,7 +59,7 @@ function remove_role(this_ ){
   table.find('tr').each(function() {
     $(this).find('td,th').each(function () {
       if ($(this).index() == idx) {
-        if ($(this).data('id') != undefined) {
+        if ($(this).data('id')) {
           ok = false;
         }
         return false;
@@ -99,7 +99,6 @@ function add_role(this_) {
 
   // Now shift all data as well
   table.find('tr').each(function() {
-    console.log(this);
     var node = $('<td class="' + clsname + ' secondary empty" data-class="' + cls + '">');
     $(this).find('td[data-class="' + cls + '"]').last().after(node);
   });

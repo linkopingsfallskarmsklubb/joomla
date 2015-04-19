@@ -36,7 +36,7 @@ var hour_group_idx = 0;
 
     // Now get the value from user and pass it to server script (the id can also be a date).
     var queryString = "?action=" + action + qstr;
-    ajaxRequest.open("GET", "admin_schema_db.php" + queryString, true);
+    ajaxRequest.open("GET", "admin_hoppdagar_db.php" + queryString, true);
     ajaxRequest.send(null);
   }
 
