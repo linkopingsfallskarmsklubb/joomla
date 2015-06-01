@@ -200,28 +200,28 @@ class PlgUserLfk extends JPlugin {
       $lfk = $data['lfk'];
     }
 
-    $db = JFactory::getDbo();
-    $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
-      'MemberNo = "' . (int)$lfk['license'] . '"');
-    try {
-      $results = $db->loadRowList();
-    } catch (RuntimeException $e) {
-      $this->_subject->setError($e->getMessage());
-      return false;
-    }
-
-    if (count($results) == 0) {
-        throw new Exception(
-          JText::_('PLG_USER_LFK_FIELD_LICENSE_NOT_FOUND'));
-    } else if (count($results) > 1) {
-        throw new Exception(
-          JText::_('PLG_USER_LFK_FIELD_LICENSE_MULTIPLE'));
-    }
-
-    $result = $results[0];
-
     $app = JFactory::getApplication();
     if ($app->isSite() && $isNew) {
+      $db = JFactory::getDbo();
+      $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
+        'MemberNo = "' . (int)$lfk['license'] . '"');
+      try {
+        $results = $db->loadRowList();
+      } catch (RuntimeException $e) {
+        $this->_subject->setError($e->getMessage());
+        return false;
+      }
+  
+      if (count($results) == 0) {
+          throw new Exception(
+            JText::_('PLG_USER_LFK_FIELD_LICENSE_NOT_FOUND'));
+      } else if (count($results) > 1) {
+          throw new Exception(
+            JText::_('PLG_USER_LFK_FIELD_LICENSE_MULTIPLE'));
+      }
+  
+      $result = $results[0];
+
       if ($result[0] == NULL) {
         throw new Exception('Internal Error: InternalNo was NULL');
       }
@@ -286,8 +286,8 @@ class PlgUserLfk extends JPlugin {
 
       // If we're changing the license number from the admin site
       // or we're a new user, resolve the internal ID.
-      if ($isNew || (!$app->isSite() &&
-                     $data['lfk']['license'] != $oldData['license'])) {
+      if (($isNew && (int)$data['lfk']['license'] != 0) ||
+         (!$app->isSite() && $data['lfk']['license'] != $oldData['license'])) {
         $db = JFactory::getDbo();
         $db->setQuery('SELECT InternalNo, PID FROM skywin.member WHERE ' .
           'MemberNo = "' . (int)$data['lfk']['license'] . '"');
