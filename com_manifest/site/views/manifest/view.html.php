@@ -104,7 +104,8 @@ class ManifestViewManifest extends JViewLegacy {
   loadjump.InternalNo = Member.InternalNo GROUP BY loadjump.planereg
   ORDER BY loadjump.planereg",
 "SELECT date(Loadjump.Regdate), Loadjump.PlaneReg, Loadjump.Altitude, tj.jumptypename,
-  Ceil(Loadjump.Price) FROM $d.typejumps tj,
+  Ceil(Loadjump.DiscountedPrice + Loadjump.rentalamount + Loadjump.externalamount +
+       Loadjump.extraamount + Loadjump.climateamount) FROM $d.typejumps tj,
   $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
   WHERE Member.InternalNo = $skywinId AND tj.jumptype=loadjump.jumptype
   ORDER BY Regdate desc,loadjump.loadno DESC"),
