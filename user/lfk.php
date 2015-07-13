@@ -186,7 +186,6 @@ class PlgUserLfk extends JPlugin {
         // TODO: Currently all fields are read-only after creation
         // but that is likely to change.
         $form->setFieldAttribute($field, 'readonly', 'true', 'lfk');
-        $form->setFieldAttribute($field, 'required', 'required', 'lfk');
       }
     }
 
