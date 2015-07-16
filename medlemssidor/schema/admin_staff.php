@@ -1,14 +1,5 @@
 <?php
 $staff_order = array('hl', 'hm', 'manifest', 'pilot', 'tandem', 'foto');
-$staff = array(
-  'hm'=> array(array(1021110, 'Johan Beck-Norén')),
-  'manifest'=> array(array(1021133, 'Johan Rex')),
-  'hl'=> array(array(1021274, 'Magnus Lundahl')),
-  'pilot'=> array(array(1015043, 'Alexander Jacobs')),
-  'tandem'=> array(array(1021198, 'Arvid Selander')),
-  'foto' => array(array(121197, 'Ola Persson'),
-                  array(1021077, 'Viktor Zetterström'))
-);
 
 $staff_labels = array(
   'hl' => 'HL',
@@ -19,16 +10,14 @@ $staff_labels = array(
   'foto' => 'Foto'
 );
 
-$slots = array(
-  '2015-04-30' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff),
-  '2015-05-01' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff),
-  '2015-05-02' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff),
-  '2015-06-10' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff),
-  '2015-06-11' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff),
-  '2015-06-12' => array('start'=> 60*10, 'stop'=> 18*60+30, 'staff'=> $staff)
-);
-$func_count_staff = function($val) {
-  return array_map(count, $val['staff']);
+$generation = count(glob('data/schedule.*.json'));
+$slots = json_decode(file_get_contents('data/schedule.' . $generation . '.json'), true);
+$func_count_staff = function($day) {
+  $m = 0;
+  foreach($day as $split) {
+    $m = max($m, array_map(count, $split['staff']));
+  }
+  return $m;
 };
 $func_assoc_max = function($a, $b) {
   $ret = $b;
@@ -40,20 +29,6 @@ $func_assoc_max = function($a, $b) {
 
 $staff_size = array_reduce(array_map($func_count_staff, $slots),
   $func_assoc_max);
-
-function time2human($time) {
-  $hour = floor($time / 60);
-  $min =  $time % 60;
-  if ($hour < 10) {
-    $hour = '0' . $hour;
-  }
-
-  if ($min < 10) {
-    $min = '0' . $min;
-  }
-
-  return $hour . ':' . $min;
-}
 ?>
 <html>
 <head>
@@ -65,11 +40,9 @@ function time2human($time) {
   <link rel="stylesheet" type="text/css" href="pure-min.css" />
   <link rel="stylesheet" type="text/css" href="admin_staff.css" />
 </head>
-<body>
+<body data-generation="<?php echo $generation; ?>">
 
-<div id="title">
-Schemaläggning
-</div>
+<div id="title">Schemaläggning</div>
 <div id="top">
 <table>
 <tr id="show-quick">
@@ -77,7 +50,7 @@ Schemaläggning
 <td class="spacer"></td>
 <td colspan="3"><button data-types="hl,hm,manifest" class="show-quick-btn">Mark</button></td>
 <td class="spacer"></td>
-<td><button data-types="pilot" class="show-quick-btn">Pilot</button></td>
+<td colspan="2"><button data-types="pilot-am,pilot-pm" class="show-quick-btn">Pilot</button></td>
 <td class="spacer"></td>
 <td colspan="2"><button data-types="tandem,foto" class="show-quick-btn">Tandem</button></td>
 </tr>
@@ -88,7 +61,8 @@ Schemaläggning
 <td><input type="checkbox" name="show[]" checked="1" value="hm" id="show-hm" /><label for="show-hm">HM</label></td>
 <td><input type="checkbox" name="show[]" checked="1" value="manifest" id="show-manifest" /><label for="show-manifest">Manifestor</label></td>
 <td class="spacer"></td>
-<td><input type="checkbox" name="show[]" checked="1" value="pilot" id="show-pilot" /><label for="show-pilot">Pilot</label></td>
+<td><input type="checkbox" name="show[]" checked="1" value="pilot-am" id="show-pilot-am" /><label for="show-pilot-am">Pilot (FM)</label></td>
+<td><input type="checkbox" name="show[]" checked="1" value="pilot-pm" id="show-pilot-pm" /><label for="show-pilot-pm">Pilot (EM)</label></td>
 <td class="spacer"></td>
 <td><input type="checkbox" name="show[]" checked="1" value="tandem" id="show-tandem" /><label for="show-tandem">Tandem</label></td>
 <td><input type="checkbox" name="show[]" checked="1" value="foto" id="show-foto" /><label for="show-foto">Foto</label></td>
@@ -96,7 +70,7 @@ Schemaläggning
 </table>
 </div>
 <table id="schedule">
-<tr>
+<tr id="schedule-header">
 <th class="day">Dag</th>
 <th class="time-start">Start</th>
 <th class="time-split">&nbsp;</th>
@@ -125,11 +99,12 @@ foreach($staff_order as $staff_type) {
 </tr>
 
 <?php foreach($slots as $slot => $data): ?>
+<?php $data = $data[0]; ?>
 <tr class="first">
 <td class="day" data-day="<?php echo $slot; ?>"><?php echo $slot; ?></td>
-<td class="time-start" data-time="<?php echo $data['start'];?>"><?php echo time2human($data['start']); ?></td>
+<td class="time-start" data-time="<?php echo $data['start'];?>"></td>
 <td class="time-split"><button class="pure-button split">&#x2702;</button></td>
-<td class="time-end" data-time="<?php echo $data['stop'];?>"><?php echo time2human($data['stop']); ?></td>
+<td class="time-end" data-time="<?php echo $data['stop'];?>"></td>
 <?php
 foreach($staff_order as $staff_type) {
   $classes = 'staff';
@@ -155,8 +130,8 @@ foreach($staff_order as $staff_type) {
     if ($person === null) {
       echo '>';
     } else {
-      echo 'data-id="' . $person[0] . '">';
-      echo $person[1];
+      echo 'data-id="' . $person . '">';
+      echo 'Laddar ..';
     }
     echo '</td>';
   }
@@ -178,6 +153,7 @@ Tid 2: <span class="split-time-day"></span> <span class="split-time"></span> - <
 <br />
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="staff-table"></table>
 </div>
+<button id="save">Spara</button>
 <script src="admin_staff.js"></script>
 </body>
 </html>

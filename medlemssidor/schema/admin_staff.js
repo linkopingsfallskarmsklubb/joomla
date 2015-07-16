@@ -6,6 +6,7 @@ var staff_dialog = null;
 var staff_table = null;
 var staff_selected = null;
 var staff = {};
+var staff_left_to_preload = -1;
 var classes = {
   'hl': 'Hoppledare',
   'hm': 'Hoppmästare',
@@ -119,8 +120,8 @@ function show_only(classes) {
 function split(old_row) {
   var split_time = $('#split-time-range').val();
   var row = old_row.clone();
-  old_row.find('.time-end').data('time', split_time).text(time2human(split_time));
-  row.find('.time-start').data('time', split_time).text(time2human(split_time));
+  old_row.find('.time-end').attr('data-time', split_time).text(time2human(split_time));
+  row.find('.time-start').attr('data-time', split_time).text(time2human(split_time));
 
   var btn = $('<button class="pure-button remove">Slå ihop</button>');
   row.find('.day').text('').append(btn);
@@ -140,12 +141,12 @@ function split(old_row) {
     }
     // OK to remove - patch the other rows with our times
     var end_time = row.find('.time-end').data('time');
-    row.prev().find('.time-end').data('time', end_time).text(time2human(end_time));
+    row.prev().find('.time-end').attr('data-time', end_time).text(time2human(end_time));
     row.remove();
   });
 
   // Default to no staff selected
-  row.find('.staff').data('id', 0).text('').addClass('empty');
+  row.find('.staff').removeAttr('data-id').text('').addClass('empty');
   row.removeClass('first').addClass('later');
 
   row.find('.split').click(split_button_click);
@@ -180,12 +181,12 @@ function staff_dialog_select(person) {
   if (person) {
     $(staff_selected)
       .text(person.FirstName + ' ' + person.LastName)
-      .data('id', person.InternalNo)
+      .attr('data-id', person.InternalNo)
       .removeClass('empty');
   } else {
     $(staff_selected)
       .text('')
-      .data('id', 0)
+      .removeAttr('data-id')
       .addClass('empty');
   }
   staff_dialog.dialog('close');
@@ -196,7 +197,7 @@ function staff_click() {
   var id = $(this).data('id');
   var person = staff[cls][id];
   if (person == undefined && id) {
-    alert('Varning! ' + $(this).text() + ' uppfyller inte längre kraven ' +
+    alert('Varning! Vald person uppfyller inte längre kraven ' +
         'för rollen ' + classes[cls] + ' och är därför inte omvalbar.');
   }
   staff_dialog.dialog('open');
@@ -217,15 +218,29 @@ function preload_response(map, data) {
   data.forEach(function(elem) {
     map[elem.InternalNo] = elem;
   });
+  staff_left_to_preload--;
+  if (staff_left_to_preload == 0) {
+    $('.staff[data-id]').each(function() {
+      var type = $(this).attr('data-class');
+      var id = parseInt($(this).attr('data-id'));
+      var person = staff[type][id];
+      if (person == undefined) {
+        $(this).html('<font color="red">Okänd person</font>');
+      } else {
+        $(this).text(person.FirstName + ' ' + person.LastName);
+      }
+    });
+    console.log('Staff preloading complete');
+  }
 }
 
 function preload_staff() {
+  staff_left_to_preload = Object.keys(classes).length;
   Object.keys(classes).forEach(function(type) {
     staff[type] = {};
     $.getJSON('/templates/lfk/api/staff.php?type=' + type,
       preload_response.bind(undefined, staff[type])).fail(preload_error);
   });
-  console.log('Staff preloading complete');
 }
 
 preload_staff();
@@ -290,5 +305,44 @@ $(document).ready(function() {
   });
   $('.show-quick-btn').click(function () {
     show_only($(this).data('types').split(','));
+  });
+  $('td[data-time]').each(function() {
+    $(this).text(time2human($(this).attr('data-time')));
+  });
+  $('#save').click(function() {
+    var days = {};
+    $('#schedule tr').each(function() {
+      if ($(this).attr('id') == 'schedule-header') {
+        return;
+      }
+
+      var day = $(this).find('td[data-day]').attr('data-day');
+      if ($(this).hasClass('first')) {
+        days[day] = [];
+      }
+
+      var staff = {};
+      // HACK: Iterate twice to pre-populate with lists, because I'm lazy.
+      $(this).find('.staff[data-id]').each(function() {
+        staff[$(this).attr('data-class')] = [];
+      });
+      $(this).find('.staff[data-id]').each(function() {
+        staff[$(this).attr('data-class')].push(
+          parseInt($(this).attr('data-id')));
+      });
+
+      var split = {
+        'start': parseInt($(this).find('.time-start').attr('data-time')),
+        'stop': parseInt($(this).find('.time-end').attr('data-time')),
+        'staff': staff,
+      };
+      days[day].push(split);
+    });
+    var generation = $('body').attr('data-generation');
+    var save = {'data': JSON.stringify(days)};
+    $.post('staff_save.php?generation=' + generation, save)
+      .fail(function() {
+        alert('Kunde inte spara schemat, det har antagligen ändrats av någon annan');
+      });
   });
 });
