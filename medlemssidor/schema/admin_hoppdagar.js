@@ -69,7 +69,7 @@ $(document).on('focusout', '#tid_start, #tid_stop', function() {
 //-------------------------------------------------------------------------
 
 $(document).ready(function(){
-  highlight_f();
+  load();
 });
 
 
@@ -223,3 +223,51 @@ function remove_hours() {
   highlight_f();
 }
 
+function save() {
+  var generation = $('body').attr('data-generation');
+  var save = {'data': JSON.stringify(hour_groups)};
+  $.post('hoppdagar_save.php?generation=' + generation, save, function() {
+    window.location = window.location;
+  })
+    .fail(function() {
+      alert('Kunde inte spara schemat, det har antagligen ändrats av någon annan');
+    });
+}
+
+function time2human(time) {
+  var hour = Math.floor(time / 60);
+  var min = time % 60;
+  if (hour < 10) {
+    hour = '0' + hour.toString();
+  } else {
+    hour = hour.toString();
+  }
+  if (min < 10) {
+    min = '0' + min.toString();
+  } else {
+    min = min.toString();
+  }
+
+  return hour + ':' + min;
+}
+
+function load() {
+  $.getJSON('hoppdagar_load.php', function(data) {
+    hour_groups = data;
+    Object.keys(hour_groups).forEach(function (key) {
+      var from = time2human(parseInt(key.split(':')[0]));
+      var to = time2human(parseInt(key.split(':')[1]));
+      var color = hour_group_idx++;
+      var legend = document.getElementById('color-legend');
+      var node = document.createElement('li');
+      node.innerHTML = '<span class="hl_outer_' + color + '">' +
+        from + ' -> ' + to + '</span>';
+      legend.appendChild(node);
+      hour_groups[key]['color'] = color;
+      hour_groups[key]['node'] = node;
+    });
+   
+    console.log(hour_groups);
+    highlight_f();
+  });
+}

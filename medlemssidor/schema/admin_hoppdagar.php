@@ -17,7 +17,7 @@ for($hour = 0; $hour < 24; $hour++) {
 }
 ?>
 </head>
-<body>
+<body data-generation="<?php echo count(glob('data/hoppdagar.*.json')); ?>">
 
 <div id="control">
 <h2>Steg 1. Markera dagar</h2>
@@ -48,7 +48,7 @@ for($hour = 0; $hour < 24; $hour++) {
 <h2>Steg 3. Granska och spara</h2>
   <ul id="color-legend">
   </ul>
-  <input type="button" value="Spara" />
+  <input type="button" value="Spara" onclick="save()" />
 </div>
 <div id="calendars">
 <?php for ($month = 0; $month < 12; $month++): ?>
