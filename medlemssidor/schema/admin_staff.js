@@ -189,10 +189,14 @@ function staff_dialog_select(person) {
         .removeClass('empty');
     }
   } else {
-    $(staff_selected)
-      .text('')
-      .removeAttr('data-id')
-      .addClass('empty');
+    var changed = $(staff_selected).attr('data-id') != undefined;
+    if (changed) {
+      $(staff_selected)
+        .text('')
+        .removeAttr('data-id')
+        .addClass('changed')
+        .addClass('empty');
+    }
   }
   staff_dialog.dialog('close');
 }

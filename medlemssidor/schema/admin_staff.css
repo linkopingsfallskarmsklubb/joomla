@@ -27,7 +27,7 @@ td.staff:hover {
 }
 td.staff.empty::before {
   font-style: italic;
-  color: #ddd;
+  color: #aaa;
 }
 .later td.staff.empty::before {
   content: "Samma som förra";
