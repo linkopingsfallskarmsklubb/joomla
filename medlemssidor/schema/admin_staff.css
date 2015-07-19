@@ -15,6 +15,10 @@ body {
 .staff {
   width: 10em;
   min-width: 10em;
+  white-space: nowrap;
+}
+.staff.changed {
+  background-color: #ffcbdb;
 }
 td.staff:hover {
   background-color: #ff8;
@@ -27,14 +31,17 @@ td.staff.empty::before {
 }
 .later td.staff.empty::before {
   content: "Samma som förra";
+  display: block;
 }
 .first td.staff.empty::before {
   content: "Ingen vald";
+  display: block;
 }
 td.staff.empty:hover::before {
   content: "Klicka för att välja";
   font-style: normal;
   color: black;
+  display: block;
 }
 th.staff[data-class] {
   text-align: left;
@@ -48,6 +55,11 @@ th.staff[data-class] {
   padding: 0.3em 0.5em 0.3em 0.5em;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.split {
+  /* TOOD(bluecmd): we do not support loading splits yet, so disable it
+   * until it's needed */
+  display: none;
 }
 .remove {
   background-color: #fcc;

@@ -75,7 +75,7 @@ $(document).ready(function(){
 
 function date2iso(d) {
   var fd = d.getFullYear() + '-';
-  if (d.getMonth() < 10) { fd += "0"; }
+  if (d.getMonth() < 9) { fd += "0"; }
   fd += (d.getMonth()+1) + '-';
   if (d.getDate() < 10) { fd += "0"; }
   fd += d.getDate();

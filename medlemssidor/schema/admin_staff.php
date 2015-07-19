@@ -1,17 +1,60 @@
 <?php
-$staff_order = array('hl', 'hm', 'manifest', 'pilot', 'tandem', 'foto');
+$staff_order = array('hl', 'hm', 'manifest', 'pilot-am', 'pilot-pm', 'tandem',
+  'foto');
 
 $staff_labels = array(
   'hl' => 'HL',
   'hm' => 'HM',
   'manifest' => 'Manifestor',
-  'pilot' => 'Pilot',
+  'pilot-am' => 'Pilot (FM)',
+  'pilot-pm' => 'Pilot (EM)',
   'tandem' => 'Tandem',
   'foto' => 'Foto'
 );
 
+$generation = count(glob('data/hoppdagar.*.json'));
+$hour_groups = json_decode(file_get_contents('data/hoppdagar.' . $generation . '.json'), true);
+
+$days = array();
+foreach($hour_groups as $hour_group => $group) {
+  $start = (int)(explode(':', $hour_group)[0]);
+  $stop = (int)(explode(':', $hour_group)[1]);
+
+  foreach($group['dates'] as $day => $v) {
+    $days[$day] = array($start, $stop);
+  }
+}
+
 $generation = count(glob('data/schedule.*.json'));
-$slots = json_decode(file_get_contents('data/schedule.' . $generation . '.json'), true);
+$saved_slots = json_decode(file_get_contents('data/schedule.' . $generation . '.json'), true);
+
+/* Combine hoppdagar with saved slots */
+$slots = array();
+foreach($days as $day => $times) {
+  $day_start = $times[0];
+  $day_stop = $times[1];
+  $obj = array();
+  if (array_key_exists($day, $saved_slots)) {
+    $obj = $saved_slots[$day];
+    if (count($obj) > 0) {
+      $obj[0]['start'] = $day_start;
+      $obj[count($obj)-1]['stop'] = $day_stop;
+      /* TODO: handle cases where the split is after the new end time */
+    }
+  } else {
+    $split = array();
+    $split['start'] = $day_start;
+    $split['stop'] = $day_stop;
+    $split['staff'] = array();
+    foreach($staff_order as $staff) {
+      $split['staff'][$staff] = array();
+    }
+    $obj[] = $split;
+  }
+  $slots[$day] = $obj;
+}
+ksort($slots);
+
 $func_count_staff = function($day) {
   $m = 0;
   foreach($day as $split) {
@@ -29,6 +72,9 @@ $func_assoc_max = function($a, $b) {
 
 $staff_size = array_reduce(array_map($func_count_staff, $slots),
   $func_assoc_max);
+foreach($staff_order as $staff_type) {
+  $staff_size[$staff_type] = max(1, $staff_size[$staff_type]);
+}
 ?>
 <html>
 <head>
@@ -79,8 +125,7 @@ $staff_size = array_reduce(array_map($func_count_staff, $slots),
 <?php
 foreach($staff_order as $staff_type) {
   $classes = 'staff';
-  if ($staff_type == 'pilot' || $staff_type == 'tandem' ||
-      $staff_type == 'foto') {
+  if ($staff_type == 'tandem' || $staff_type == 'foto') {
     $classes .= ' multiple';
   }
   for($i = 0; $i < $staff_size[$staff_type]; $i++) {
@@ -108,8 +153,7 @@ foreach($staff_order as $staff_type) {
 <?php
 foreach($staff_order as $staff_type) {
   $classes = 'staff';
-  if ($staff_type == 'pilot' || $staff_type == 'tandem' ||
-      $staff_type == 'foto') {
+  if ($staff_type == 'tandem' || $staff_type == 'foto') {
     $classes .= ' multiple';
   }
 

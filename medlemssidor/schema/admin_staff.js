@@ -12,7 +12,8 @@ var classes = {
   'hm': 'Hoppmästare',
   'manifest': 'Manifestor',
   'tandem': 'Tandempilot',
-  'pilot': 'Pilot',
+  'pilot-am': 'Pilot (FM)',
+  'pilot-pm': 'Pilot (EM)',
   'foto': 'Fotograf'
 };
 
@@ -171,7 +172,7 @@ function staff_dialog_refresh(cls, person) {
     'order': [[3, 'desc'], [0, 'asc'], [1, 'asc']]
   });
 
-  $('#staff-table tbody').on('click', 'tr', function () {
+  $('#staff-table tbody').off('click', 'tr').on('click', 'tr', function () {
     var person = staff_table.fnGetData(this);
     staff_dialog_select(person);
   });
@@ -179,10 +180,14 @@ function staff_dialog_refresh(cls, person) {
 
 function staff_dialog_select(person) {
   if (person) {
-    $(staff_selected)
-      .text(person.FirstName + ' ' + person.LastName)
-      .attr('data-id', person.InternalNo)
-      .removeClass('empty');
+    var changed = $(staff_selected).attr('data-id') != person.InternalNo;
+    if (changed) {
+      $(staff_selected)
+        .text(person.FirstName + ' ' + person.LastName)
+        .attr('data-id', person.InternalNo)
+        .addClass('changed')
+        .removeClass('empty');
+    }
   } else {
     $(staff_selected)
       .text('')
@@ -200,8 +205,9 @@ function staff_click() {
     alert('Varning! Vald person uppfyller inte längre kraven ' +
         'för rollen ' + classes[cls] + ' och är därför inte omvalbar.');
   }
-  staff_dialog.dialog('open');
   staff_dialog_refresh(cls, person);
+  staff_dialog.dialog('open');
+  $('#staff-dialog input').focus();
   staff_selected = this;
 }
 
@@ -237,8 +243,15 @@ function preload_response(map, data) {
 function preload_staff() {
   staff_left_to_preload = Object.keys(classes).length;
   Object.keys(classes).forEach(function(type) {
+    if (type == 'pilot-am') {
+      api_type = 'pilot';
+    } else if (type == 'pilot-pm') {
+      api_type = 'pilot';
+    } else {
+      api_type = type;
+    }
     staff[type] = {};
-    $.getJSON('/templates/lfk/api/staff.php?type=' + type,
+    $.getJSON('/templates/lfk/api/staff.php?type=' + api_type,
       preload_response.bind(undefined, staff[type])).fail(preload_error);
   });
 }
@@ -256,6 +269,11 @@ $(document).ready(function() {
       "Avbryt": function() {
         split_dialog.dialog('close');
       }},
+    open: function(event, ui) {
+      $('.ui-widget-overlay').bind('click', function() {
+        $('#split-dialog').dialog('close');
+      });
+    },
     close: function() {
       clearInterval(split_dialog_updater);
       split_dialog_updater = null;
@@ -274,6 +292,11 @@ $(document).ready(function() {
       "Avbryt": function() {
         staff_dialog.dialog('close');
       }
+    },
+    open: function(event, ui) {
+      $('.ui-widget-overlay').bind('click', function() {
+        $('#staff-dialog').dialog('close');
+      });
     },
     close: function() {
     }});
@@ -340,7 +363,10 @@ $(document).ready(function() {
     });
     var generation = $('body').attr('data-generation');
     var save = {'data': JSON.stringify(days)};
-    $.post('staff_save.php?generation=' + generation, save)
+    $.post('staff_save.php?generation=' + generation, save, function() {
+      alert('Schemat är nu sparat');
+      window.location = window.location;
+    })
       .fail(function() {
         alert('Kunde inte spara schemat, det har antagligen ändrats av någon annan');
       });
