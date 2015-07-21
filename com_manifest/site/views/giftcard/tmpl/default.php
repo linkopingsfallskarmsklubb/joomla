@@ -86,7 +86,7 @@ $doc = JFactory::getDocument();
     <th><?php echo JText::_('COM_MANIFEST_GIFTCARD_NOTE'); ?></th>
   </tr>
 <?php foreach($this->giftcards as $r_idx => $giftcard): ?>
-  <tr>
+  <tr class="<?php echo $giftcard['expired'] == '0' ? 'active' : 'expired'; ?>">
     <td>
       <input type="button" class="giftcard-remove" data-giftcard="<?php echo $giftcard['num']; ?>" value="&#x2421;" />
     </td>
@@ -98,7 +98,7 @@ if ($giftcard['jumped'] == 1) {
 }
 ?></td>
     <td><?php echo $giftcard['num']; ?></td>
-    <td><?php echo $giftcard['expire']; ?></td>
+    <td class="expire"><?php echo $giftcard['expire']; ?></td>
     <td><?php echo $giftcard['person']; ?></td>
     <td style="font-size: xx-small"><?php echo $giftcard['contact']; ?></td>
     <td style="font-size: xx-small"><?php echo $giftcard['email']; ?></td>
