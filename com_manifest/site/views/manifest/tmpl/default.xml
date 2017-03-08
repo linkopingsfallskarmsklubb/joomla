@@ -3,13 +3,13 @@
   <layout title="COM_MANIFEST_VIEW_MANIFEST_TITLE">
     <message>COM_MANIFEST_VIEW_MANIFEST_DESC</message>
   </layout>
-
   <fields name="request">
     <fieldset name="request">
       <field name="datatype" type="list" required="true"
         label="COM_MANIFEST_DATATYPE_LABEL">
         <option value="top_jumps">COM_MANIFEST_DATATYPE_TOP_JUMPS_TITLE</option>
-        <option value="top_fun">COM_MANIFEST_DATATYPE_TOP_FUN_TITLE</option>
+        <option value="top_fun">COM_MANIFEST_DATATYPE_TOP_FUN_JUMPS_TITLE</option>
+        <option value="top_work">COM_MANIFEST_DATATYPE_TOP_WORK_JUMPS_TITLE</option>
         <option value="top_drop">COM_MANIFEST_DATATYPE_TOP_DROP_TITLE</option>
         <option value="top_loadmaster">COM_MANIFEST_DATATYPE_TOP_LOADMASTER_TITLE</option>
         <option value="top_student">COM_MANIFEST_DATATYPE_TOP_STUDENT_TITLE</option>

@@ -107,7 +107,8 @@ class ManifestViewGiftcard extends JViewLegacy {
       exit();
     }
 
-    $db->setQuery('SELECT * FROM #__giftcards ORDER BY num DESC');
+    $db->setQuery('SELECT *, expire < NOW() as expired FROM '.
+      '#__giftcards ORDER BY num DESC');
 
     try {
       $this->giftcards = $db->loadAssocList();
