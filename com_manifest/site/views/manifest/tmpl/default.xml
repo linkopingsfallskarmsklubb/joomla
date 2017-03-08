@@ -3,7 +3,6 @@
   <layout title="COM_MANIFEST_VIEW_MANIFEST_TITLE">
     <message>COM_MANIFEST_VIEW_MANIFEST_DESC</message>
   </layout>
-
   <fields name="request">
     <fieldset name="request">
       <field name="datatype" type="list" required="true"
