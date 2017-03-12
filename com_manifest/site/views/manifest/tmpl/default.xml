@@ -9,8 +9,9 @@
         label="COM_MANIFEST_DATATYPE_LABEL">
         <option value="top_jumps">COM_MANIFEST_DATATYPE_TOP_JUMPS_TITLE</option>
         <option value="top_fun">COM_MANIFEST_DATATYPE_TOP_FUN_TITLE</option>
-        <option value="top_work">COM_MANIFEST_DATATYPE_TOP_WORK_JUMPS_TITLE</option>
+        <option value="top_fun_alltime">COM_MANIFEST_DATATYPE_TOP_FUN_ALLTIME_TITLE</option>
         <option value="top_drop">COM_MANIFEST_DATATYPE_TOP_DROP_TITLE</option>
+        <option value="top_work">COM_MANIFEST_DATATYPE_TOP_WORK_TITLE</option>
         <option value="top_loadmaster">COM_MANIFEST_DATATYPE_TOP_LOADMASTER_TITLE</option>
         <option value="top_student">COM_MANIFEST_DATATYPE_TOP_STUDENT_TITLE</option>
         <option value="club">COM_MANIFEST_DATATYPE_CLUB_TITLE</option>
