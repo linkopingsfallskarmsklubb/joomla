@@ -70,10 +70,26 @@ class ManifestViewManifest extends JViewLegacy {
   'top_fun' => array(
 "SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
   FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='Övning' OR
-  Loadjump.JumpType='Wingsuit')
-  WHERE year(Loadjump.Regdate) = $year GROUP BY Member.FirstName,
-  Member.LastName ORDER BY Count(Loadjump.Regdate) DESC LIMIT 25"),
+  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='O' OR Loadjump.JumpType='WING')
+  GROUP BY Member.FirstName, Member.LastName 
+  ORDER BY Count(Loadjump.Regdate) 
+  DESC LIMIT 25"),
+
+  'top_fun_alltime' => array(
+"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
+  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
+  WHERE Loadjump.JumpType='O' OR Loadjump.JumpType='WING'
+  GROUP BY Member.FirstName, Member.LastName 
+  ORDER BY Count(Loadjump.Regdate) 
+  DESC LIMIT 25"),
+
+  'top_work' => array(
+"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
+  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
+  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='T' OR Loadjump.JumpType='V' OR Loadjump.JumpType='I' OR Loadjump.JumpType='TANDEM-EJ')
+  GROUP BY Member.FirstName, Member.LastName 
+  ORDER BY Count(Loadjump.Regdate) 
+  DESC LIMIT 25"),
 
   'aircraft' => array(
 "SELECT Load.Planereg, Count(load.Regdate),
