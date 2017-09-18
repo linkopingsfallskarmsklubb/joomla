@@ -86,7 +86,7 @@ class ManifestViewManifest extends JViewLegacy {
   'top_work' => array(
 "SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
   FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='T' OR Loadjump.JumpType='V' OR Loadjump.JumpType='I' OR Loadjump.JumpType='TANDEM-EJ')
+  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='T' OR Loadjump.JumpType='V' OR Loadjump.JumpType='I' OR Loadjump.JumpType='HMI' OR Loadjump.JumpType='TANDEM-EJ')
   GROUP BY Member.FirstName, Member.LastName 
   ORDER BY Count(Loadjump.Regdate) 
   DESC LIMIT 25"),
