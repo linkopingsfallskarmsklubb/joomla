@@ -35,108 +35,108 @@ class ManifestViewManifest extends JViewLegacy {
     $d = 'skywin';
 
     // Construct the Datatype -> SQL(s) map
-    $sql_map = array(
+    $sql_map = array
   'top_loadmaster' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadrole.Regdate)
-  FROM $d.Member INNER JOIN $d.Loadrole ON Member.InternalNo = Loadrole.InternalNo
-  WHERE year(Loadrole.Regdate) = $year AND RoleType='LOADMASTER'
-  GROUP BY Member.FirstName, Member.LastName
-  ORDER BY Count(LoadRole.Regdate) DESC"),
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadrole.Regdate)
+  FROM $d.member INNER JOIN $d.loadrole ON member.InternalNo = loadrole.InternalNo
+  WHERE year(loadrole.Regdate) = $year AND RoleType='LOADMASTER'
+  GROUP BY member.FirstName, member.LastName
+  ORDER BY Count(loadrole.Regdate) DESC"),
 
   'top_student' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate),
-  Member.StudentJumpNo, Member.LicenseType, date(Member.FirstJumpdate)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='M' OR
-  Loadjump.JumpType='A' OR Loadjump.JumpType LIKE 'SFU%')
-  GROUP BY Member.FirstName, Member.LastName,
-  Member.FirstJumpdate, Member.StudentJumpNo, Member.LicenseType
-  ORDER BY Count(Loadjump.Regdate) DESC"),
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadjump.Regdate),
+  member.StudentJumpNo, member.LicenseType, date(member.FirstJumpdate)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE year(loadjump.Regdate) = $year AND (loadjump.JumpType='M' OR
+  loadjump.JumpType='A' OR loadjump.JumpType LIKE 'SFU%')
+  GROUP BY member.FirstName, member.LastName,
+  member.FirstJumpdate, member.StudentJumpNo, member.LicenseType
+  ORDER BY Count(loadjump.Regdate) DESC"),
 
   'top_drop' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName),
-  Ceil(Sum(Loadjump.altitude) / 1000)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE Year(Loadjump.Regdate) = $year
-  GROUP BY Member.FirstName, Member.LastName ORDER BY Sum(Loadjump.altitude)
+"SELECT concat(member.FirstName, ' ', member.LastName),
+  Ceil(Sum(loadjump.altitude) / 1000)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE Year(loadjump.Regdate) = $year
+  GROUP BY member.FirstName, member.LastName ORDER BY Sum(loadjump.altitude)
   DESC LIMIT 25"),
 
   'top_jumps' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year GROUP BY Member.FirstName,
-  Member.LastName ORDER BY Count(Loadjump.Regdate) DESC LIMIT 25"),
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadjump.Regdate)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE year(loadjump.Regdate) = $year GROUP BY member.FirstName,
+  member.LastName ORDER BY Count(loadjump.Regdate) DESC LIMIT 25"),
      
   'top_fun' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='O' OR Loadjump.JumpType='WING')
-  GROUP BY Member.FirstName, Member.LastName 
-  ORDER BY Count(Loadjump.Regdate) 
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadjump.Regdate)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE year(loadjump.Regdate) = $year AND (loadjump.JumpType='O' OR loadjump.JumpType='WING')
+  GROUP BY member.FirstName, member.LastName 
+  ORDER BY Count(loadjump.Regdate) 
   DESC LIMIT 25"),
 
   'top_fun_alltime' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE Loadjump.JumpType='O' OR Loadjump.JumpType='WING'
-  GROUP BY Member.FirstName, Member.LastName 
-  ORDER BY Count(Loadjump.Regdate) 
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadjump.Regdate)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE loadjump.JumpType='O' OR loadjump.JumpType='WING'
+  GROUP BY member.FirstName, member.LastName 
+  ORDER BY Count(loadjump.Regdate) 
   DESC LIMIT 25"),
 
   'top_work' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Count(Loadjump.Regdate)
-  FROM $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE year(Loadjump.Regdate) = $year AND (Loadjump.JumpType='T' OR Loadjump.JumpType='V' OR Loadjump.JumpType='I' OR Loadjump.JumpType='HMI' OR Loadjump.JumpType='TANDEM-EJ')
-  GROUP BY Member.FirstName, Member.LastName 
-  ORDER BY Count(Loadjump.Regdate) 
+"SELECT concat(member.FirstName, ' ', member.LastName), Count(loadjump.Regdate)
+  FROM $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE year(loadjump.Regdate) = $year AND (loadjump.JumpType='T' OR loadjump.JumpType='V' OR loadjump.JumpType='I' OR loadjump.JumpType='HMI' OR loadjump.JumpType='TANDEM-EJ')
+  GROUP BY member.FirstName, member.LastName 
+  ORDER BY Count(loadjump.Regdate) 
   DESC LIMIT 25"),
 
   'aircraft' => array(
-"SELECT Load.Planereg, Count(load.Regdate),
-  (SELECT Count(loadjump.LoadNo) FROM $d.LoadJump WHERE
-   Loadjump.Planereg=Load.Planereg),
-  round((SELECT Count(loadjump.LoadNo) FROM $d.LoadJump WHERE
-   Loadjump.Planereg=Load.Planereg) / Count(load.Regdate), 2)
+"SELECT load.Planereg, Count(load.Regdate),
+  (SELECT Count(loadjump.LoadNo) FROM $d.loadjump WHERE
+   loadjump.Planereg=load.Planereg),
+  round((SELECT Count(loadjump.LoadNo) FROM $d.loadjump WHERE
+   loadjump.Planereg=load.Planereg) / Count(load.Regdate), 2)
   FROM $d.`load`
-   GROUP BY Load.PlaneReg ORDER BY Load.planereg",
-"SELECT Load.PlaneReg, Year(load.RegDate), Count(Load.Regdate),
-  (SELECT Count(Loadjump.loadno) FROM $d.loadjump WHERE
+   GROUP BY load.PlaneReg ORDER BY load.planereg",
+"SELECT load.PlaneReg, Year(load.RegDate), Count(load.Regdate),
+  (SELECT Count(loadjump.loadno) FROM $d.loadjump WHERE
    loadjump.PlaneReg=load.PlaneReg AND year(load.regdate) =
    year(loadjump.regdate)),
-  Round((SELECT Count(Loadjump.loadno) FROM $d.loadjump WHERE
+  Round((SELECT Count(loadjump.loadno) FROM $d.loadjump WHERE
    loadjump.PlaneReg=load.PlaneReg AND year(load.regdate) =
     year(loadjump.regdate)) / Count(load.Regdate), 2)
-  FROM $d.`Load` GROUP BY Load.Planereg, Year(load.regdate)
-  ORDER BY Load.PlaneReg, Year(load.regdate)"),
+  FROM $d.`load` GROUP BY load.Planereg, Year(load.regdate)
+  ORDER BY load.PlaneReg, Year(load.regdate)"),
 
   'account' => array(
 "SELECT ceil(t.Balance), date(t.Regdate)
-  FROM $d.Member AS m INNER JOIN $d.trans AS t
+  FROM $d.member AS m INNER JOIN $d.trans AS t
   ON m.AccountNo = t.AccountNo WHERE m.InternalNo = $skywinId
   ORDER BY t.TransNo DESC LIMIT 1",
 "SELECT t.TransType, t.AccountType, date(t.Regdate),
   ceil(t.Amount), ceil(t.Balance), t.Comment
-  FROM $d.Member AS m INNER JOIN $d.trans AS t
+  FROM $d.member AS m INNER JOIN $d.trans AS t
   ON m.AccountNo = t.AccountNo WHERE m.InternalNo = $skywinId
   ORDER BY t.TransNo DESC"),
 
   'jumps' => array(
-"SELECT Loadjump.Planereg, Count(Member.MemberNo), Min(loadjump.altitude),
+"SELECT loadjump.Planereg, Count(member.memberNo), Min(loadjump.altitude),
   max(loadjump.altitude), ceil(avg(loadjump.altitude)),
   ceil(sum(loadjump.altitude) / 1000)
   FROM $d.member, $d.loadjump WHERE member.InternalNo = $skywinId AND
-  loadjump.InternalNo = Member.InternalNo GROUP BY loadjump.planereg
+  loadjump.InternalNo = member.InternalNo GROUP BY loadjump.planereg
   ORDER BY loadjump.planereg",
-"SELECT date(Loadjump.Regdate), Loadjump.PlaneReg, Loadjump.Altitude, tj.jumptypename,
-  Ceil(Loadjump.DiscountedPrice + Loadjump.rentalamount + Loadjump.externalamount +
-       Loadjump.extraamount + Loadjump.climateamount) FROM $d.typejumps tj,
-  $d.Member INNER JOIN $d.Loadjump ON Member.InternalNo = Loadjump.InternalNo
-  WHERE Member.InternalNo = $skywinId AND tj.jumptype=loadjump.jumptype
+"SELECT date(loadjump.Regdate), loadjump.PlaneReg, loadjump.Altitude, tj.jumptypename,
+  Ceil(loadjump.DiscountedPrice + loadjump.rentalamount + loadjump.externalamount +
+       loadjump.extraamount + loadjump.climateamount) FROM $d.typejumps tj,
+  $d.member INNER JOIN $d.loadjump ON member.InternalNo = loadjump.InternalNo
+  WHERE member.InternalNo = $skywinId AND tj.jumptype=loadjump.jumptype
   ORDER BY Regdate desc,loadjump.loadno DESC"),
 
   'shame' => array(
-"SELECT concat(Member.FirstName, ' ', Member.LastName), Member.Balance
-    FROM $d.Member WHERE Balance < 0 ORDER BY Balance LIMIT 25"),
+"SELECT concat(member.FirstName, ' ', member.LastName), member.Balance
+    FROM $d.member WHERE Balance < 0 ORDER BY Balance LIMIT 25"),
 
   'club' => array('CALL club_stats'));
 
