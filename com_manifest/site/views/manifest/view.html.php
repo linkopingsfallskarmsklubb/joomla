@@ -35,7 +35,7 @@ class ManifestViewManifest extends JViewLegacy {
     $d = 'skywin';
 
     // Construct the Datatype -> SQL(s) map
-    $sql_map = array
+    $sql_map = array(
   'top_loadmaster' => array(
 "SELECT concat(member.FirstName, ' ', member.LastName), Count(loadrole.Regdate)
   FROM $d.member INNER JOIN $d.loadrole ON member.InternalNo = loadrole.InternalNo

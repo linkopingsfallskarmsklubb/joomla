@@ -106,7 +106,7 @@ class PlgUserLfk extends JPlugin {
       $data['phone'] = $results[0][0];
     }
 
-    $db->setQuery('SELECT Count(Regdate) FROM skywin.Loadjump ' .
+    $db->setQuery('SELECT Count(Regdate) FROM skywin.loadjump ' .
       'WHERE InternalNo = "' . (int)$skywinId . '"');
 
     try {
